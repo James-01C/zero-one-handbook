@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getIcon } from '@/lib/icons';
+import { SectionIcon } from '@/components/home/SectionIcon';
 import { cn } from '@/lib/utils';
 import type { Section, ContentType } from '@/types/content';
 
@@ -22,8 +22,6 @@ const typeLabels: Record<ContentType, string> = {
 };
 
 export function SectionCard({ section }: SectionCardProps) {
-  const Icon = getIcon(section.icon);
-
   const typeCounts = section.pages.reduce(
     (acc, page) => {
       acc[page.meta.type] = (acc[page.meta.type] || 0) + 1;
@@ -39,7 +37,7 @@ export function SectionCard({ section }: SectionCardProps) {
     >
       <div className="mb-3 flex items-center gap-3">
         <div className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
-          <Icon className="size-5" />
+          <SectionIcon icon={section.icon} />
         </div>
         <div className="flex-1">
           <h2 className="font-semibold leading-tight">{section.title}</h2>

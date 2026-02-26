@@ -1,12 +1,27 @@
 import * as Icons from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
-export function getIcon(iconName: string): LucideIcon {
-  const pascalName = iconName
-    .split('-')
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join('');
+const iconMap: Record<string, LucideIcon> = {
+  rocket: Icons.Rocket,
+  code: Icons.Code,
+  wrench: Icons.Wrench,
+  shield: Icons.Shield,
+  'file-text': Icons.FileText,
+  book: Icons.Book,
+  settings: Icons.Settings,
+  users: Icons.Users,
+  zap: Icons.Zap,
+  globe: Icons.Globe,
+  lock: Icons.Lock,
+  terminal: Icons.Terminal,
+  database: Icons.Database,
+  layout: Icons.Layout,
+  folder: Icons.Folder,
+  star: Icons.Star,
+  heart: Icons.Heart,
+  alert: Icons.AlertCircle,
+};
 
-  const icon = (Icons as unknown as Record<string, LucideIcon>)[pascalName];
-  return icon || Icons.FileText;
+export function getIcon(iconName: string): LucideIcon {
+  return iconMap[iconName] || Icons.FileText;
 }

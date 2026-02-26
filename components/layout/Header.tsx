@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
@@ -36,12 +37,12 @@ export function Header({ sections }: HeaderProps) {
         </Button>
 
         {/* App name */}
-        <a href="/" className="flex items-center gap-2 font-semibold">
+        <Link href="/" className="flex items-center gap-2 font-semibold">
           <span className="hidden text-lg sm:inline-block">
             Zero One Handbook
           </span>
           <span className="text-lg sm:hidden">ZO Handbook</span>
-        </a>
+        </Link>
 
         {/* Search bar with instant results */}
         <SearchBar />

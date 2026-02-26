@@ -4,7 +4,7 @@ import { getAllSections, getSection } from '@/lib/content';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { TypeBadge } from '@/components/content/TypeBadge';
 import { RoleBadge } from '@/components/content/RoleBadge';
-import { getIcon } from '@/lib/icons';
+import { SectionIcon } from '@/components/home/SectionIcon';
 import type { Metadata } from 'next';
 
 interface SectionPageProps {
@@ -37,8 +37,6 @@ export default async function SectionPage({ params }: SectionPageProps) {
     notFound();
   }
 
-  const Icon = getIcon(section.icon);
-
   return (
     <div>
       <Breadcrumbs sectionTitle={section.title} />
@@ -46,7 +44,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <div className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
-            <Icon className="size-5" />
+            <SectionIcon icon={section.icon} />
           </div>
           <div>
             <h1 className="text-2xl font-bold tracking-tight">

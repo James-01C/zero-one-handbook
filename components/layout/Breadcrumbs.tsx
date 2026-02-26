@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronRight, Home } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -55,12 +56,12 @@ export function Breadcrumbs({ sectionTitle, pageTitle }: BreadcrumbsProps) {
                   {segment.label}
                 </span>
               ) : (
-                <a
+                <Link
                   href={segment.href}
                   className="truncate hover:text-foreground transition-colors"
                 >
                   {segment.label}
-                </a>
+                </Link>
               )}
             </li>
           );

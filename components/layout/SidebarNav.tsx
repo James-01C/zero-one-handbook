@@ -1,10 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { getIcon } from '@/lib/icons';
+import { SectionIcon } from '@/components/home/SectionIcon';
 import type { Section } from '@/types/content';
 
 interface SidebarNavProps {
@@ -34,7 +35,6 @@ export function SidebarNav({ sections, onNavigate }: SidebarNavProps) {
   return (
     <nav className="space-y-1 px-2">
       {sections.map((section) => {
-        const Icon = getIcon(section.icon);
         const isExpanded = expandedSections.has(section.slug);
         const isSectionActive = pathname.startsWith(`/${section.slug}`);
 
@@ -49,7 +49,7 @@ export function SidebarNav({ sections, onNavigate }: SidebarNavProps) {
                   : 'text-muted-foreground'
               )}
             >
-              <Icon className="size-4 shrink-0" />
+              <SectionIcon icon={section.icon} className="size-4" />
               <span className="flex-1 text-left">{section.title}</span>
               <span className="text-xs text-muted-foreground">
                 {section.pages.length}
@@ -64,7 +64,7 @@ export function SidebarNav({ sections, onNavigate }: SidebarNavProps) {
 
             {isExpanded && (
               <div className="ml-4 mt-0.5 space-y-0.5 border-l border-border pl-3">
-                <a
+                <Link
                   href={`/${section.slug}`}
                   onClick={onNavigate}
                   className={cn(
@@ -75,13 +75,13 @@ export function SidebarNav({ sections, onNavigate }: SidebarNavProps) {
                   )}
                 >
                   Overview
-                </a>
+                </Link>
                 {section.pages.map((page) => {
                   const pagePath = `/${section.slug}/${page.slug}`;
                   const isActive = pathname === pagePath;
 
                   return (
-                    <a
+                    <Link
                       key={page.slug}
                       href={pagePath}
                       onClick={onNavigate}
@@ -93,7 +93,7 @@ export function SidebarNav({ sections, onNavigate }: SidebarNavProps) {
                       )}
                     >
                       {page.meta.title}
-                    </a>
+                    </Link>
                   );
                 })}
               </div>

@@ -1,4 +1,5 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import remarkGfm from 'remark-gfm';
 import type { ComponentPropsWithoutRef } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -115,7 +116,11 @@ function slugify(children: unknown): string {
 export function MdxContent({ source, className }: MdxContentProps) {
   return (
     <div className={cn('mdx-content', className)}>
-      <MDXRemote source={source} components={mdxComponents} />
+      <MDXRemote
+        source={source}
+        components={mdxComponents}
+        options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+      />
     </div>
   );
 }

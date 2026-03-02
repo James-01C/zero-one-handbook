@@ -1,4 +1,5 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import remarkGfm from 'remark-gfm';
 import type { ComponentPropsWithoutRef } from 'react';
 import type { Page } from '@/types/content';
 
@@ -141,7 +142,7 @@ export function PolicyRenderer({ page }: PolicyRendererProps) {
               strong: (props: ComponentPropsWithoutRef<'strong'>) => (
                 <strong className="font-semibold" {...props} />
               ),
-            }} />
+            }} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
           ) : (
             <p className="text-sm leading-relaxed text-foreground">
               {page.meta.summary}
@@ -163,6 +164,7 @@ export function PolicyRenderer({ page }: PolicyRendererProps) {
               <MDXRemote
                 source={section.content}
                 components={policyMdxComponents}
+                options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
               />
             </div>
           </section>

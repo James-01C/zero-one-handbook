@@ -1,5 +1,7 @@
 import remarkGfm from 'remark-gfm';
 import type { ComponentPropsWithoutRef } from 'react';
+import { remarkCallouts } from '@/lib/remark-callouts';
+import { Callout } from '@/components/content/Callout';
 
 /**
  * Shared MDX options for all renderers. Single source of truth for
@@ -7,8 +9,16 @@ import type { ComponentPropsWithoutRef } from 'react';
  */
 export const sharedMdxOptions = {
   mdxOptions: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkGfm, remarkCallouts],
   },
+};
+
+/**
+ * Custom MDX components shared across all renderers. Spread into
+ * each renderer's component map so new components only need one registration.
+ */
+export const customComponents: Record<string, React.ComponentType<never>> = {
+  Callout: Callout as React.ComponentType<never>,
 };
 
 /**

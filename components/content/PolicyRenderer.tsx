@@ -1,7 +1,7 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import type { ComponentPropsWithoutRef } from 'react';
 import type { Page } from '@/types/content';
-import { sharedMdxOptions, tableComponents } from '@/lib/mdx';
+import { sharedMdxOptions, tableComponents, customComponents } from '@/lib/mdx';
 
 interface PolicyRendererProps {
   page: Page;
@@ -105,6 +105,7 @@ const policyMdxComponents = {
     <blockquote className="mb-3 border-l-4 border-amber-500/40 bg-amber-500/5 py-2 pl-4 text-muted-foreground last:mb-0" {...props} />
   ),
   ...tableComponents,
+  ...customComponents,
 };
 
 const tldrComponents = {

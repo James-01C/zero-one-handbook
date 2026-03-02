@@ -1,7 +1,7 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import type { ComponentPropsWithoutRef } from 'react';
 import { cn } from '@/lib/utils';
-import { sharedMdxOptions, tableComponents } from '@/lib/mdx';
+import { sharedMdxOptions, tableComponents, customComponents } from '@/lib/mdx';
 
 interface MdxContentProps {
   source: string;
@@ -75,6 +75,7 @@ const mdxComponents = {
     />
   ),
   ...tableComponents,
+  ...customComponents,
   hr: () => <hr className="my-8 border-border" />,
   strong: (props: ComponentPropsWithoutRef<'strong'>) => (
     <strong className="font-semibold text-foreground" {...props} />

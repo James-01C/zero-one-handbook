@@ -5,6 +5,7 @@ import {
   sharedMdxOptions,
   tableComponents,
   compactTableComponents,
+  customComponents,
 } from '@/lib/mdx';
 
 interface SOPRendererProps {
@@ -95,6 +96,7 @@ const stepMdxComponents = {
     <strong className="font-semibold text-foreground" {...props} />
   ),
   ...compactTableComponents,
+  ...customComponents,
 };
 
 const introMdxComponents = {
@@ -114,6 +116,7 @@ const introMdxComponents = {
     <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground" {...props} />
   ),
   ...tableComponents,
+  ...customComponents,
 };
 
 export function SOPRenderer({ page }: SOPRendererProps) {

@@ -126,3 +126,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Compact table styles for chat messages */
+.chat-message .prose table {
+  @apply text-sm;
+}
+.chat-message .prose th,
+.chat-message .prose td {
+  @apply px-3 py-1.5;
+}

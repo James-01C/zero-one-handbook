@@ -54,6 +54,8 @@ Content is markdown files in `/content/[section]/[slug].md`. Each section has a 
 - **Tailwind v4 plugins** use `@plugin` directive in CSS, not `@import`.
 - **Fuse.js v7 types** — import `IFuseOptions` and `FuseResultMatch` as named type imports, not as `Fuse.` namespace (namespace pattern doesn't work in v7).
 - **Hydration-safe mounting** — use `useSyncExternalStore` instead of `useEffect` + `setState` for mounted checks (avoids `react-hooks/set-state-in-effect` lint error).
+- **Chat responses use react-markdown + remark-gfm for rendering.** The static content pages use `next-mdx-remote` (server-side MDX). The chat uses `react-markdown` (client-side markdown). These are separate pipelines — never mix them.
+- **Chat system prompt must instruct Claude to use markdown table syntax**, not HTML or JSON, for tabular data.
 
 ## Work Process
 
@@ -65,7 +67,7 @@ Content is markdown files in `/content/[section]/[slug].md`. Each section has a 
 ## Do NOT
 
 - Do NOT install packages not in the spec without asking first
-- Do NOT create API routes — v1 is entirely static (no server-side data fetching at request time)
+- Do NOT create new API routes beyond `/api/chat` — the chat route is the only server endpoint
 - Do NOT add authentication, database tables, or Supabase client code — that's v1.1+
 - Do NOT put content parsing logic in components — it belongs in lib/content.ts
 - Do NOT use `require()` — use ES module imports only

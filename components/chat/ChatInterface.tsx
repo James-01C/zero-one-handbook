@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { Send, Loader2, AlertCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useSearch } from '@/components/search/SearchProvider';
@@ -146,8 +148,8 @@ export function ChatInterface({ compact = false }: ChatInterfaceProps) {
     sendMessage(input);
   };
 
-  const renderContent = (content: string) => {
-    // Convert markdown-style links to clickable links
+  const renderUserContent = (content: string) => {
+    // Convert markdown-style links to clickable links for user messages
     const parts = content.split(/(\[.*?\]\(\/.*?\))/g);
     return parts.map((part, i) => {
       const linkMatch = part.match(/\[(.*?)\]\((\/.*?)\)/);
@@ -212,12 +214,46 @@ export function ChatInterface({ compact = false }: ChatInterfaceProps) {
                 'max-w-[85%] rounded-lg px-4 py-2.5 text-sm leading-relaxed',
                 msg.role === 'user'
                   ? 'bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
-                  : 'bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100'
+                  : 'chat-message bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100'
               )}
             >
-              <div className="whitespace-pre-wrap">
-                {renderContent(msg.content)}
-              </div>
+              {msg.role === 'assistant' ? (
+                <div className="prose prose-sm dark:prose-invert max-w-none">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      a: ({ href, children }) => {
+                        if (href?.startsWith('/')) {
+                          return (
+                            <Link
+                              href={href}
+                              className="font-medium text-blue-600 underline hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                            >
+                              {children}
+                            </Link>
+                          );
+                        }
+                        return (
+                          <a
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium text-blue-600 underline hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                          >
+                            {children}
+                          </a>
+                        );
+                      },
+                    }}
+                  >
+                    {msg.content}
+                  </ReactMarkdown>
+                </div>
+              ) : (
+                <div className="whitespace-pre-wrap">
+                  {renderUserContent(msg.content)}
+                </div>
+              )}
             </div>
           </div>
         ))}

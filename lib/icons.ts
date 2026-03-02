@@ -20,6 +20,12 @@ const iconMap: Record<string, LucideIcon> = {
   star: Icons.Star,
   heart: Icons.Heart,
   alert: Icons.AlertCircle,
+  Compass: Icons.Compass,
+  GitBranch: Icons.GitBranch,
+  LayoutDashboard: Icons.LayoutDashboard,
+  Map: Icons.Map,
+  MessageSquare: Icons.MessageSquare,
+  Network: Icons.Network,
 };
 
 export function getIcon(iconName: string): LucideIcon {

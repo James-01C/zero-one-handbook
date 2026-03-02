@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Map, MessageSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SectionIcon } from '@/components/home/SectionIcon';
 import type { Section } from '@/types/content';
@@ -34,6 +34,21 @@ export function SidebarNav({ sections, onNavigate }: SidebarNavProps) {
 
   return (
     <nav className="space-y-1 px-2">
+      {/* System Overview link */}
+      <Link
+        href="/visuals"
+        onClick={onNavigate}
+        className={cn(
+          'flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
+          pathname === '/visuals'
+            ? 'bg-accent text-accent-foreground'
+            : 'text-muted-foreground'
+        )}
+      >
+        <Map className="size-4" />
+        <span className="flex-1 text-left">System Overview</span>
+      </Link>
+
       {sections.map((section) => {
         const isExpanded = expandedSections.has(section.slug);
         const isSectionActive = pathname.startsWith(`/${section.slug}`);
@@ -101,6 +116,21 @@ export function SidebarNav({ sections, onNavigate }: SidebarNavProps) {
           </div>
         );
       })}
+
+      {/* Chat link */}
+      <Link
+        href="/chat"
+        onClick={onNavigate}
+        className={cn(
+          'flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
+          pathname === '/chat'
+            ? 'bg-accent text-accent-foreground'
+            : 'text-muted-foreground'
+        )}
+      >
+        <MessageSquare className="size-4" />
+        <span className="flex-1 text-left">Ask Amara</span>
+      </Link>
     </nav>
   );
 }

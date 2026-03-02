@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Footer } from '@/components/layout/Footer';
 import { SearchProvider } from '@/components/search/SearchProvider';
+import { ChatWidget } from '@/components/chat/ChatWidget';
 import { getAllSections, getAllSearchableItems } from '@/lib/content';
 
 const spaceGrotesk = Space_Grotesk({
@@ -57,6 +58,7 @@ export default function RootLayout({
                   <Footer />
                 </main>
               </div>
+              <ChatWidget />
             </div>
           </SearchProvider>
         </ThemeProvider>

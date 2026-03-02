@@ -211,14 +211,14 @@ export function ChatInterface({ compact = false }: ChatInterfaceProps) {
           >
             <div
               className={cn(
-                'max-w-[85%] rounded-lg px-4 py-2.5 text-sm leading-relaxed',
+                'max-w-[85%] overflow-hidden rounded-lg px-4 py-2.5 text-sm leading-relaxed',
                 msg.role === 'user'
                   ? 'bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
                   : 'chat-message bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100'
               )}
             >
               {msg.role === 'assistant' ? (
-                <div className="prose prose-sm dark:prose-invert max-w-none">
+                <div className="prose prose-sm dark:prose-invert max-w-none overflow-x-auto">
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{

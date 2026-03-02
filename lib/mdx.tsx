@@ -2,6 +2,7 @@ import remarkGfm from 'remark-gfm';
 import type { ComponentPropsWithoutRef } from 'react';
 import { remarkCallouts } from '@/lib/remark-callouts';
 import { Callout } from '@/components/content/Callout';
+import { Flow, Step, Arrow } from '@/components/content/Flow';
 
 /**
  * Shared MDX options for all renderers. Single source of truth for
@@ -19,6 +20,9 @@ export const sharedMdxOptions = {
  */
 export const customComponents: Record<string, React.ComponentType<never>> = {
   Callout: Callout as React.ComponentType<never>,
+  Flow: Flow as React.ComponentType<never>,
+  Step: Step as React.ComponentType<never>,
+  Arrow: Arrow as React.ComponentType<never>,
 };
 
 /**

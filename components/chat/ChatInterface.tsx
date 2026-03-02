@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Send, Loader2, AlertCircle } from 'lucide-react';
+import { Send, Loader2, AlertCircle, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useSearch } from '@/components/search/SearchProvider';
 
@@ -15,6 +15,7 @@ interface Message {
 
 interface ChatInterfaceProps {
   compact?: boolean;
+  onRequestExpand?: () => void;
 }
 
 const SUGGESTED_QUESTIONS = [
@@ -24,25 +25,65 @@ const SUGGESTED_QUESTIONS = [
   'What happens when a version is released?',
 ];
 
-export function ChatInterface({ compact = false }: ChatInterfaceProps) {
+export function ChatInterface({ compact = false, onRequestExpand }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showNewMessages, setShowNewMessages] = useState(false);
   const [fallbackResults, setFallbackResults] = useState<
     Array<{ title: string; section: string; slug: string }>
   >([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const isNearBottomRef = useRef(true);
   const { search } = useSearch();
+
+  const checkNearBottom = useCallback(() => {
+    const el = scrollContainerRef.current;
+    if (!el) return true;
+    return el.scrollHeight - el.scrollTop - el.clientHeight < 100;
+  }, []);
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    setShowNewMessages(false);
   }, []);
 
+  const handleScroll = useCallback(() => {
+    const nearBottom = checkNearBottom();
+    isNearBottomRef.current = nearBottom;
+    if (nearBottom) {
+      setShowNewMessages(false);
+    }
+  }, [checkNearBottom]);
+
   useEffect(() => {
-    scrollToBottom();
+    if (isNearBottomRef.current) {
+      scrollToBottom();
+    } else {
+      setShowNewMessages(true);
+    }
   }, [messages, scrollToBottom]);
+
+  // Smart auto-expand: check for table overflow when messages change
+  useEffect(() => {
+    if (!onRequestExpand) return;
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    // Wait for DOM to render the new content
+    const timer = setTimeout(() => {
+      const tables = el.querySelectorAll('table');
+      for (const table of tables) {
+        if (table.scrollWidth > table.clientWidth + 2) {
+          onRequestExpand();
+          break;
+        }
+      }
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [messages, onRequestExpand]);
 
   const handleFallbackSearch = useCallback(
     (query: string) => {
@@ -176,7 +217,11 @@ export function ChatInterface({ compact = false }: ChatInterfaceProps) {
       )}
     >
       {/* Messages area */}
-      <div className="flex-1 overflow-y-auto space-y-4 pb-4">
+      <div
+        ref={scrollContainerRef}
+        onScroll={handleScroll}
+        className="relative flex-1 overflow-y-auto space-y-4 pb-4"
+      >
         {messages.length === 0 && (
           <div className="space-y-4 pt-4">
             <div className="text-center">
@@ -292,6 +337,16 @@ export function ChatInterface({ compact = false }: ChatInterfaceProps) {
         )}
 
         <div ref={messagesEndRef} />
+
+        {showNewMessages && (
+          <button
+            onClick={scrollToBottom}
+            className="sticky bottom-2 left-1/2 z-10 -translate-x-1/2 flex items-center gap-1 rounded-full border border-border bg-background px-3 py-1 text-xs shadow-md transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-800"
+          >
+            <ChevronDown className="size-3" />
+            New messages
+          </button>
+        )}
       </div>
 
       {/* Input area */}

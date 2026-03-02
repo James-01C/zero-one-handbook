@@ -127,14 +127,11 @@
   }
 }
 
-/* Force-fit table styles for chat messages */
+/* Chat message table styles */
 .chat-message .prose table {
-  @apply w-full text-xs;
-  table-layout: fixed;
+  @apply text-sm;
 }
 .chat-message .prose th,
 .chat-message .prose td {
-  @apply px-2 py-1;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
+  @apply px-3 py-1.5;
 }

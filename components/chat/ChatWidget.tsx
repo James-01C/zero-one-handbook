@@ -69,7 +69,7 @@ export function ChatWidget() {
             </button>
           </div>
           <div className="p-4">
-            <ChatInterface compact />
+            <ChatInterface compact onRequestExpand={() => setIsExpanded(true)} />
           </div>
         </div>
       )}

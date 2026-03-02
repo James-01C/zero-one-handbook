@@ -4,6 +4,7 @@ import { remarkCallouts } from '@/lib/remark-callouts';
 import { Callout } from '@/components/content/Callout';
 import { Flow, Step, Arrow } from '@/components/content/Flow';
 import { DefList, Def } from '@/components/content/DefList';
+import { Divider } from '@/components/content/Divider';
 
 /**
  * Shared MDX options for all renderers. Single source of truth for
@@ -26,6 +27,7 @@ export const customComponents: Record<string, React.ComponentType<never>> = {
   Arrow: Arrow as React.ComponentType<never>,
   DefList: DefList as React.ComponentType<never>,
   Def: Def as React.ComponentType<never>,
+  Divider: Divider as React.ComponentType<never>,
 };
 
 /**

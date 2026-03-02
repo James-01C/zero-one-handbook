@@ -1,7 +1,11 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import remarkGfm from 'remark-gfm';
 import type { ComponentPropsWithoutRef } from 'react';
 import type { Page } from '@/types/content';
+import {
+  sharedMdxOptions,
+  tableComponents,
+  compactTableComponents,
+} from '@/lib/mdx';
 
 interface SOPRendererProps {
   page: Page;
@@ -90,23 +94,7 @@ const stepMdxComponents = {
   strong: (props: ComponentPropsWithoutRef<'strong'>) => (
     <strong className="font-semibold text-foreground" {...props} />
   ),
-  table: (props: ComponentPropsWithoutRef<'table'>) => (
-    <div className="mb-3 overflow-x-auto rounded-lg border border-border last:mb-0">
-      <table className="w-full text-sm" {...props} />
-    </div>
-  ),
-  thead: (props: ComponentPropsWithoutRef<'thead'>) => (
-    <thead className="border-b border-border bg-muted/50" {...props} />
-  ),
-  th: (props: ComponentPropsWithoutRef<'th'>) => (
-    <th className="px-3 py-2 text-left text-xs font-semibold text-foreground" {...props} />
-  ),
-  tr: (props: ComponentPropsWithoutRef<'tr'>) => (
-    <tr className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors" {...props} />
-  ),
-  td: (props: ComponentPropsWithoutRef<'td'>) => (
-    <td className="px-3 py-2 text-xs text-muted-foreground" {...props} />
-  ),
+  ...compactTableComponents,
 };
 
 const introMdxComponents = {
@@ -125,23 +113,7 @@ const introMdxComponents = {
   code: (props: ComponentPropsWithoutRef<'code'>) => (
     <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground" {...props} />
   ),
-  table: (props: ComponentPropsWithoutRef<'table'>) => (
-    <div className="mb-4 overflow-x-auto rounded-lg border border-border">
-      <table className="w-full text-sm" {...props} />
-    </div>
-  ),
-  thead: (props: ComponentPropsWithoutRef<'thead'>) => (
-    <thead className="border-b border-border bg-muted/50" {...props} />
-  ),
-  th: (props: ComponentPropsWithoutRef<'th'>) => (
-    <th className="px-4 py-2.5 text-left font-semibold text-foreground" {...props} />
-  ),
-  tr: (props: ComponentPropsWithoutRef<'tr'>) => (
-    <tr className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors" {...props} />
-  ),
-  td: (props: ComponentPropsWithoutRef<'td'>) => (
-    <td className="px-4 py-2.5 text-muted-foreground" {...props} />
-  ),
+  ...tableComponents,
 };
 
 export function SOPRenderer({ page }: SOPRendererProps) {
@@ -152,10 +124,10 @@ export function SOPRenderer({ page }: SOPRendererProps) {
       {intro && (
         <div className="mb-8">
           <MDXRemote
-              source={intro}
-              components={introMdxComponents}
-              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
-            />
+            source={intro}
+            components={introMdxComponents}
+            options={sharedMdxOptions}
+          />
         </div>
       )}
 
@@ -181,7 +153,7 @@ export function SOPRenderer({ page }: SOPRendererProps) {
                 <MDXRemote
                   source={step.content}
                   components={stepMdxComponents}
-                  options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+                  options={sharedMdxOptions}
                 />
               )}
             </div>

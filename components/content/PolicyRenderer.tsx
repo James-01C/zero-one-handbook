@@ -1,7 +1,7 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import remarkGfm from 'remark-gfm';
 import type { ComponentPropsWithoutRef } from 'react';
 import type { Page } from '@/types/content';
+import { sharedMdxOptions, tableComponents } from '@/lib/mdx';
 
 interface PolicyRendererProps {
   page: Page;
@@ -104,22 +104,15 @@ const policyMdxComponents = {
   blockquote: (props: ComponentPropsWithoutRef<'blockquote'>) => (
     <blockquote className="mb-3 border-l-4 border-amber-500/40 bg-amber-500/5 py-2 pl-4 text-muted-foreground last:mb-0" {...props} />
   ),
-  table: (props: ComponentPropsWithoutRef<'table'>) => (
-    <div className="mb-3 overflow-x-auto rounded-lg border border-border last:mb-0">
-      <table className="w-full text-sm" {...props} />
-    </div>
+  ...tableComponents,
+};
+
+const tldrComponents = {
+  p: (props: ComponentPropsWithoutRef<'p'>) => (
+    <p className="text-sm leading-relaxed text-foreground last:mb-0" {...props} />
   ),
-  thead: (props: ComponentPropsWithoutRef<'thead'>) => (
-    <thead className="border-b border-border bg-muted/50" {...props} />
-  ),
-  th: (props: ComponentPropsWithoutRef<'th'>) => (
-    <th className="px-4 py-2.5 text-left font-semibold text-foreground" {...props} />
-  ),
-  tr: (props: ComponentPropsWithoutRef<'tr'>) => (
-    <tr className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors" {...props} />
-  ),
-  td: (props: ComponentPropsWithoutRef<'td'>) => (
-    <td className="px-4 py-2.5 text-muted-foreground" {...props} />
+  strong: (props: ComponentPropsWithoutRef<'strong'>) => (
+    <strong className="font-semibold" {...props} />
   ),
 };
 
@@ -135,14 +128,11 @@ export function PolicyRenderer({ page }: PolicyRendererProps) {
             TL;DR
           </p>
           {tldr ? (
-            <MDXRemote source={tldr} components={{
-              p: (props: ComponentPropsWithoutRef<'p'>) => (
-                <p className="text-sm leading-relaxed text-foreground last:mb-0" {...props} />
-              ),
-              strong: (props: ComponentPropsWithoutRef<'strong'>) => (
-                <strong className="font-semibold" {...props} />
-              ),
-            }} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
+            <MDXRemote
+              source={tldr}
+              components={tldrComponents}
+              options={sharedMdxOptions}
+            />
           ) : (
             <p className="text-sm leading-relaxed text-foreground">
               {page.meta.summary}
@@ -164,7 +154,7 @@ export function PolicyRenderer({ page }: PolicyRendererProps) {
               <MDXRemote
                 source={section.content}
                 components={policyMdxComponents}
-                options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+                options={sharedMdxOptions}
               />
             </div>
           </section>

@@ -1,7 +1,7 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import remarkGfm from 'remark-gfm';
 import type { ComponentPropsWithoutRef } from 'react';
 import { cn } from '@/lib/utils';
+import { sharedMdxOptions, tableComponents } from '@/lib/mdx';
 
 interface MdxContentProps {
   source: string;
@@ -74,29 +74,7 @@ const mdxComponents = {
       {...props}
     />
   ),
-  table: (props: ComponentPropsWithoutRef<'table'>) => (
-    <div className="mb-4 overflow-x-auto rounded-lg border border-border">
-      <table className="w-full text-sm" {...props} />
-    </div>
-  ),
-  thead: (props: ComponentPropsWithoutRef<'thead'>) => (
-    <thead className="border-b border-border bg-muted/50" {...props} />
-  ),
-  th: (props: ComponentPropsWithoutRef<'th'>) => (
-    <th
-      className="px-4 py-2.5 text-left font-semibold text-foreground"
-      {...props}
-    />
-  ),
-  tr: (props: ComponentPropsWithoutRef<'tr'>) => (
-    <tr
-      className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors"
-      {...props}
-    />
-  ),
-  td: (props: ComponentPropsWithoutRef<'td'>) => (
-    <td className="px-4 py-2.5 text-muted-foreground" {...props} />
-  ),
+  ...tableComponents,
   hr: () => <hr className="my-8 border-border" />,
   strong: (props: ComponentPropsWithoutRef<'strong'>) => (
     <strong className="font-semibold text-foreground" {...props} />
@@ -119,7 +97,7 @@ export function MdxContent({ source, className }: MdxContentProps) {
       <MDXRemote
         source={source}
         components={mdxComponents}
-        options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+        options={sharedMdxOptions}
       />
     </div>
   );

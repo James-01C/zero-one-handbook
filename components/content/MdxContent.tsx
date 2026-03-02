@@ -18,14 +18,14 @@ const mdxComponents = {
   ),
   h2: (props: ComponentPropsWithoutRef<'h2'>) => (
     <h2
-      className="mb-3 mt-8 text-xl font-semibold tracking-tight first:mt-0"
+      className="mb-6 mt-16 text-xl font-semibold tracking-tight first:mt-0"
       id={slugify(props.children)}
       {...props}
     />
   ),
   h3: (props: ComponentPropsWithoutRef<'h3'>) => (
     <h3
-      className="mb-2 mt-6 text-lg font-semibold tracking-tight"
+      className="mb-3 mt-10 text-lg font-semibold tracking-tight"
       id={slugify(props.children)}
       {...props}
     />

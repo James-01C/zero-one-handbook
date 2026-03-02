@@ -21,6 +21,7 @@ function parseFrontmatter(raw: matter.GrayMatterFile<string>): ContentMeta {
     summary: data.summary as string,
     version: data.version as string,
     lastUpdated: data.lastUpdated as string,
+    order: data.order as number | undefined,
   };
 }
 
@@ -77,7 +78,7 @@ export function getPagesBySection(sectionSlug: string): Page[] {
     .readdirSync(sectionPath)
     .filter((file) => file.endsWith('.md'));
 
-  return files.map((file) => {
+  const pages = files.map((file) => {
     const filePath = path.join(sectionPath, file);
     const raw = matter(fs.readFileSync(filePath, 'utf-8'));
     const meta = parseFrontmatter(raw);
@@ -89,6 +90,8 @@ export function getPagesBySection(sectionSlug: string): Page[] {
       content: raw.content,
     };
   });
+
+  return pages.sort((a, b) => (a.meta.order ?? 999) - (b.meta.order ?? 999));
 }
 
 export function getPageBySlug(

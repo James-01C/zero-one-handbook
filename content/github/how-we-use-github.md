@@ -1,5 +1,6 @@
 ---
 title: "How We Use GitHub"
+order: 1
 type: "guide"
 roles:
   - developer

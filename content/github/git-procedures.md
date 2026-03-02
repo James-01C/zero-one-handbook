@@ -1,5 +1,6 @@
 ---
 title: "Git Procedures"
+order: 2
 type: "sop"
 roles:
   - developer

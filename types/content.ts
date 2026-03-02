@@ -9,6 +9,7 @@ export interface ContentMeta {
   summary: string;
   version: string;
   lastUpdated: string;
+  order?: number;
 }
 
 export interface Page {

@@ -1,5 +1,6 @@
 ---
 title: "Git Quick Reference"
+order: 3
 type: "reference"
 roles:
   - developer

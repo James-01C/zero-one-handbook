@@ -117,12 +117,12 @@ const platforms = [
   },
 ];
 
-// Node positions for the diamond layout (percentage-based for the SVG viewBox)
+// Node positions for the diamond layout (based on SVG viewBox 540x340)
 const nodePositions: Record<string, { x: number; y: number }> = {
-  jira: { x: 250, y: 40 },
-  github: { x: 90, y: 160 },
-  slack: { x: 410, y: 160 },
-  notion: { x: 250, y: 280 },
+  jira: { x: 270, y: 45 },
+  github: { x: 80, y: 170 },
+  slack: { x: 460, y: 170 },
+  notion: { x: 270, y: 295 },
 };
 
 function AnimatedArrow({
@@ -291,17 +291,17 @@ function NodeCard({
 
   return (
     <foreignObject
-      x={pos.x - 55}
-      y={pos.y - 30}
-      width={110}
-      height={60}
+      x={pos.x - 68}
+      y={pos.y - 33}
+      width={136}
+      height={66}
       className="overflow-visible"
     >
       <div
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         className={cn(
-          'flex h-[60px] items-center gap-2.5 rounded-xl border-2 bg-card px-3 transition-all duration-200',
+          'flex h-[66px] items-center gap-2.5 rounded-xl border-2 bg-card px-3.5 transition-all duration-200',
           platform.accentClass,
           isHighlighted && 'shadow-md scale-105',
           isDimmed && 'opacity-30'
@@ -370,7 +370,7 @@ export function SystemMap() {
       {/* SVG Diagram — desktop diamond layout */}
       <div className="hidden rounded-xl border border-border bg-card p-4 md:block">
         <svg
-          viewBox="0 0 500 320"
+          viewBox="0 0 540 340"
           className="mx-auto w-full max-w-lg"
           style={{ overflow: 'visible' }}
         >

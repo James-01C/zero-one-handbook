@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -34,12 +34,12 @@ const stages: Stage[] = [
     number: 2,
     name: 'Triage',
     platforms: ['JPD'],
-    description: 'Founders review every 2-4 weeks',
+    description: 'Inbox reviewed every 2-4 weeks',
     whatHappens:
-      'Founders review the inbox every 2-4 weeks. Ideas are approved, parked, or rejected. Approved ideas get sized: large (new epic), medium (task in existing epic), or small (standalone task).',
+      'The inbox is reviewed every 2-4 weeks. Ideas are approved, parked, or rejected. Approved ideas get sized: large (new epic), medium (task in existing epic), or small (standalone task).',
     jiraState: 'Idea moves from Inbox → In Development (if approved)',
     gitState: 'Nothing — still planning',
-    who: 'Founders (Ash, Rupert, James)',
+    who: 'Leadership team',
   },
   {
     number: 3,
@@ -141,79 +141,54 @@ const stepAccentColors: Record<number, string> = {
 };
 
 function ExpandedContent({ stage }: { stage: Stage }) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    if (contentRef.current) {
-      setHeight(contentRef.current.scrollHeight);
-    }
-  }, []);
-
   return (
     <div
-      className="overflow-hidden transition-all duration-250 ease-out"
-      style={{ maxHeight: height || 'none' }}
+      className={cn(
+        'mt-3 space-y-2.5 border-l-2 pl-3',
+        stepAccentColors[stage.number]
+      )}
     >
-      <div
-        ref={contentRef}
-        className={cn(
-          'mt-3 border-l-2 pl-3 space-y-2.5',
-          stepAccentColors[stage.number]
-        )}
-      >
-        {/* What happens */}
-        <div>
-          <p className="text-sm leading-relaxed text-foreground/80">
-            {stage.whatHappens}
-          </p>
+      <p className="text-sm leading-relaxed text-foreground/80">
+        {stage.whatHappens}
+      </p>
+
+      <div className="flex flex-col gap-1 rounded-md bg-muted/50 px-3 py-2 text-xs">
+        <div className="flex gap-2">
+          <span className="shrink-0 font-medium text-blue-600 dark:text-blue-400">
+            Jira:
+          </span>
+          <span className="text-foreground/70">{stage.jiraState}</span>
         </div>
-
-        {/* Jira ↔ Git state */}
-        <div className="flex flex-col gap-1 rounded-md bg-muted/50 px-3 py-2 text-xs">
-          <div className="flex gap-2">
-            <span className="shrink-0 font-medium text-blue-600 dark:text-blue-400">
-              Jira:
-            </span>
-            <span className="text-foreground/70">{stage.jiraState}</span>
-          </div>
-          <div className="flex gap-2">
-            <span className="shrink-0 font-medium text-zinc-600 dark:text-zinc-400">
-              Git:
-            </span>
-            <span className="font-mono text-foreground/70">
-              {stage.gitState}
-            </span>
-          </div>
+        <div className="flex gap-2">
+          <span className="shrink-0 font-medium text-zinc-600 dark:text-zinc-400">
+            Git:
+          </span>
+          <span className="font-mono text-foreground/70">{stage.gitState}</span>
         </div>
-
-        {/* Who */}
-        <p className="text-xs text-muted-foreground">
-          <span className="font-medium">Who:</span> {stage.who}
-        </p>
-
-        {/* Note (optional) */}
-        {stage.note && (
-          <p className="text-xs italic text-muted-foreground">{stage.note}</p>
-        )}
-
-        {/* Auto (optional) */}
-        {stage.auto && (
-          <p className="text-xs text-muted-foreground">
-            <span className="font-medium">Auto:</span> {stage.auto}
-          </p>
-        )}
-
-        {/* Link (optional) */}
-        {stage.link && (
-          <Link
-            href={stage.link.href}
-            className="inline-block text-xs font-medium text-blue-600 hover:underline dark:text-blue-400"
-          >
-            Read more: {stage.link.label} →
-          </Link>
-        )}
       </div>
+
+      <p className="text-xs text-muted-foreground">
+        <span className="font-medium">Who:</span> {stage.who}
+      </p>
+
+      {stage.note && (
+        <p className="text-xs italic text-muted-foreground">{stage.note}</p>
+      )}
+
+      {stage.auto && (
+        <p className="text-xs text-muted-foreground">
+          <span className="font-medium">Auto:</span> {stage.auto}
+        </p>
+      )}
+
+      {stage.link && (
+        <Link
+          href={stage.link.href}
+          className="inline-block text-xs font-medium text-blue-600 hover:underline dark:text-blue-400"
+        >
+          Read more: {stage.link.label} →
+        </Link>
+      )}
     </div>
   );
 }

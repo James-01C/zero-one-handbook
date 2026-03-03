@@ -14,7 +14,7 @@ export function Sidebar() {
       <Separator />
       <div className="px-4 py-3">
         <p className="text-xs text-muted-foreground">
-          Zero One Handbook v1.1.0
+          Zero One Handbook v1.2.0
         </p>
       </div>
     </aside>

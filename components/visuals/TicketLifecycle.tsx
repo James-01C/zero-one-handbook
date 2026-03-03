@@ -39,7 +39,7 @@ const stages: Stage[] = [
       'The inbox is reviewed every 2-4 weeks. Ideas are approved, parked, or rejected. Approved ideas get sized: large (new epic), medium (task in existing epic), or small (standalone task).',
     jiraState: 'Idea moves from Inbox → In Development (if approved)',
     gitState: 'Nothing — still planning',
-    who: 'Leadership team',
+    who: 'Reviewed during triage sessions',
   },
   {
     number: 3,

@@ -221,7 +221,7 @@ Ideas go through Product Discovery (separate Jira project):
 <Flow>
   <Step color="blue">Idea submitted</Step>
   <Arrow label="triage" />
-  <Step color="amber">Founders review</Step>
+  <Step color="amber">Triage review</Step>
   <Arrow label="approved" />
   <Step color="green">DEV epic created</Step>
 </Flow>

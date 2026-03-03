@@ -27,6 +27,11 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
     text: 'text-rose-700 dark:text-rose-300',
     border: 'border-rose-500/30',
   },
+  purple: {
+    bg: 'bg-purple-500/10 dark:bg-purple-500/15',
+    text: 'text-purple-700 dark:text-purple-300',
+    border: 'border-purple-500/30',
+  },
 };
 
 const defaultColor = {

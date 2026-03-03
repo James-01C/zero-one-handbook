@@ -9,11 +9,30 @@ version: "1.0"
 lastUpdated: "2026-03-02"
 ---
 
+> [!TLDR]
+> - Jira is the source of truth for work. GitHub is the source of truth for code.
+> - Four statuses: To Do → In Progress → In Review → Done. "Done" means merged to dev, not released.
+> - Every ticket needs a Component and a parent Epic. Fix Version required once in a sprint.
+> - Three epic types: Feature (scoped work), Bug & Maintenance (auto-created per version), Hotfix (production-critical).
+> - Branch names with `DEV-###` auto-link Jira tickets to GitHub.
+
 ## What Jira Is For
 
 Jira is where we track what's being built, who's working on what, and where things stand. Every piece of development work — features, bugs, maintenance — lives as a ticket in the DEV project.
 
 GitHub is the source of truth for code. Jira is the source of truth for work.
+
+<Flow>
+  <Step color="blue">To Do</Step>
+  <Arrow label="start work" />
+  <Step color="amber">In Progress</Step>
+  <Arrow label="open PR" />
+  <Step color="purple">In Review</Step>
+  <Arrow label="merge" />
+  <Step color="green">Done</Step>
+</Flow>
+
+---
 
 ## The Board: Four Statuses
 
@@ -26,12 +45,14 @@ Every ticket moves through four columns:
 | **In Review** | PR is open — the ball is with the reviewer | PR open against dev/X.Y.Z |
 | **Done** | PR merged, branch deleted, work complete | Merged into dev branch |
 
-**Key things:**
+> [!RULE]
+> "Done" means merged to dev, not released to production. Release tracking happens at the Fix Version level.
 
-- **"Done" means merged to dev, not released to production.** Release tracking happens at the Fix Version level.
-- **There's no "Blocked" column.** If you're blocked, use Jira's flag feature (the little flag icon). Blocked is a modifier, not a state.
-- **Sprint hygiene:** If something is In Progress but you haven't touched it this sprint, move it back to To Do.
-- **Resolution Summary:** When you move a ticket to Done, write a brief one-liner describing what was done.
+> [!TIP]
+> There's no "Blocked" column — use Jira's flag feature instead. And if something is In Progress but untouched this sprint, move it back to To Do.
+
+> [!INFO]
+> When you move a ticket to Done, write a brief resolution summary describing what was done.
 
 ### Allowed Transitions
 
@@ -42,7 +63,10 @@ Every ticket moves through four columns:
 | **In Review** | Done, In Progress | Merged, or review found issues |
 | **Done** | In Progress | Reopened (rare) |
 
-**Not allowed:** In Review → To Do. Close or draft the PR first, then go through In Progress.
+> [!RULE]
+> You cannot go from In Review → To Do. Close or draft the PR first, then move through In Progress.
+
+---
 
 ## Components
 
@@ -55,10 +79,8 @@ Every ticket must have a Component. We have four, matching the product:
 | **Website** | Marketing site, mesh gen interface, plugin downloads, user accounts | `website/v*` |
 | **MeshGen** | Mesh generation model and pipeline | `meshgen/v*` |
 
-**Rules:**
-- Set a component on every ticket. It's required.
-- Most tickets should have one component. Three or more usually means the ticket should be split.
-- Components in Jira match components in GitHub.
+> [!RULE]
+> Set a component on every ticket — it's required. Most tickets have one. Three or more usually means the ticket should be split.
 
 ## Fix Versions
 
@@ -75,37 +97,37 @@ Each Fix Version maps directly to a GitHub tag. "Plugin 1.2.0" → `plugin/v1.2.
 
 **Why component-prefixed?** Our components ship on different timelines. A single unified version number wouldn't map to anything real.
 
+---
+
 ## Epics: Three Types
 
-### Feature Epics
-
-A feature or significant change, scoped to one component and one version.
-
-**Naming:** `[Component] Short description` — e.g. `[Plugin] Scene export wizard`
-
-**Auto-created:** Two bookend tasks appear automatically — Research & Scoping, and Final Review & Close-out. You fill in the work between them.
-
-### Bug & Maintenance Epics
-
-One per component per version. Catches bugs and small fixes that don't belong to a feature epic.
-
-**Naming:** `[Component] X.Y.Z — Bug Fixes & Maintenance`
-
-**Auto-created** when a new Fix Version is created.
-
-### Hotfix Epics
-
-For production-critical issues that can't wait.
-
-**Naming:** `[Component] Hotfix X.Y.Z`
-
-Always bumps the patch version. See the Hotfix SOP for the full process.
+<DefList>
+  <Def term="Feature Epic" color="blue" example="[Plugin] Scene export wizard">
+    A feature or significant change, scoped to one component and one version. Two bookend tasks auto-created: Research & Scoping, and Final Review & Close-out. You fill in the work between them.
+  </Def>
+  <Def term="Bug & Maintenance Epic" color="amber" example="[Plugin] 1.2.0 — Bug Fixes & Maintenance">
+    One per component per version. Catches bugs and small fixes that don't belong to a feature epic. Auto-created when a new Fix Version is created.
+  </Def>
+  <Def term="Hotfix Epic" color="red" example="[Plugin] Hotfix 1.2.1">
+    For production-critical issues that can't wait. Always bumps the patch version. See the Hotfix SOP for the full process.
+  </Def>
+</DefList>
 
 ### Bug Routing
 
-- **Bug found during development** (not critical) → Bug & Maintenance epic for the current version
-- **Production-critical bug** → Create a Hotfix epic with its own patch version
-- **Bug with no active version** → Backlog without Fix Version
+<DefList>
+  <Def term="Bug found during development" color="amber">
+    Not critical — goes into the Bug & Maintenance epic for the current version.
+  </Def>
+  <Def term="Production-critical bug" color="red">
+    Create a Hotfix epic with its own patch version.
+  </Def>
+  <Def term="Bug with no active version" color="blue">
+    Backlog without Fix Version.
+  </Def>
+</DefList>
+
+---
 
 ## Creating a Ticket
 
@@ -155,6 +177,8 @@ Auto-populated when you create a ticket.
 [Component version, browser, OS if relevant]
 ```
 
+---
+
 ## Labels
 
 Labels are restricted to source and process tags (`ai-generated`, `meeting-processor`, `discord-intake`) and are applied automatically. They're not for topic categorisation.
@@ -164,6 +188,8 @@ Labels are restricted to source and process tags (`ai-generated`, `meeting-proce
 Epics use three statuses: **To Do**, **In Progress**, **Done**.
 
 Epics don't auto-close when child tasks are done. The epic owner makes a deliberate decision to close — this is a quality gate.
+
+---
 
 ## How Jira Connects to GitHub
 
@@ -181,15 +207,19 @@ Epics don't auto-close when child tasks are done. The epic owner makes a deliber
 - Component and Fix Version inheritance from parent epic
 - Deployment notifications from GitHub to Slack
 
-**If something automatic isn't working, flag it — don't just do it manually.**
+> [!RULE]
+> If something automatic isn't working, flag it — don't just do it manually.
 
 ## Product Discovery
 
 Ideas go through Product Discovery (separate Jira project):
 
-1. Ideas land in an Inbox
-2. Founders triage every 2-4 weeks: approve, backlog, or reject
-3. Approved ideas get a delivery epic in DEV
-4. Progress tracked automatically
+<Flow>
+  <Step color="blue">Idea submitted</Step>
+  <Arrow label="triage" />
+  <Step color="amber">Founders review</Step>
+  <Arrow label="approved" />
+  <Step color="green">DEV epic created</Step>
+</Flow>
 
 If you have an idea, submit it. If you want to check status, look at the In Development view.

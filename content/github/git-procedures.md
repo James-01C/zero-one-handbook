@@ -5,8 +5,8 @@ type: 'sop'
 roles:
   - developer
 summary: 'Five step-by-step procedures: start a feature, finish a feature, promote to staging, release to prod, and hotfix.'
-version: '1.0'
-lastUpdated: '2026-03-02'
+version: '1.1'
+lastUpdated: '2026-03-03'
 ---
 
 Five procedures covering the full Git workflow. All merges happen via GitHub Pull Requests — select the merge strategy using the PR dropdown, not local git commands.
@@ -86,7 +86,8 @@ git pull origin dev/1.2.0
 git checkout -b feature/DEV-501-fix-edge-case
 ```
 
-Never reuse a merged feature branch. Always create a fresh one from dev.
+> [!RULE]
+> Never reuse a merged feature branch. Always create a fresh one from dev.
 
 ## Step 3: Promote Dev to Staging
 
@@ -98,7 +99,8 @@ Open a Pull Request on GitHub. Base: `staging` ← Compare: `dev/1.2.0`.
 
 Merge using **"Create a merge commit"**. Use regular merge commit — not squash, not rebase.
 
-> **Rule:** Only the current dev/X.Y.Z should be merged to staging. Anything else must be announced and confirmed by the team.
+> [!RULE]
+> Only the current dev/X.Y.Z should be merged to staging. Anything else must be announced and confirmed by the team.
 
 ## Step 4: Release to Production
 
@@ -120,7 +122,8 @@ git tag backend/v1.2.0
 git push origin --tags
 ```
 
-Only tag the components that actually changed.
+> [!TIP]
+> Only tag the components that actually changed.
 
 Post-release:
 
@@ -153,6 +156,9 @@ git push -u origin hotfix/1.2.1
 ```
 
 Choose the merge path:
+
+> [!RULE]
+> Choose carefully — merging a hotfix the wrong way can push unreleased features to production.
 
 **Path A — Staging is clean (matches prod):** PR from `hotfix/1.2.1` → `staging` (merge commit). Test on staging. Then PR from `staging` → `prod` (merge commit).
 

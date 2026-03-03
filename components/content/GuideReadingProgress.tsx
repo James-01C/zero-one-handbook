@@ -8,7 +8,8 @@ export function GuideReadingProgress() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       if (docHeight > 0) {
         setProgress(Math.min((scrollTop / docHeight) * 100, 100));
       }

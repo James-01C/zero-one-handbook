@@ -36,7 +36,11 @@ export function ChatWidget() {
         )}
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
-        {isOpen ? <X className="size-5" /> : <MessageSquare className="size-5" />}
+        {isOpen ? (
+          <X className="size-5" />
+        ) : (
+          <MessageSquare className="size-5" />
+        )}
       </button>
 
       {/* Chat panel */}
@@ -69,7 +73,10 @@ export function ChatWidget() {
             </button>
           </div>
           <div className="p-4">
-            <ChatInterface compact onRequestExpand={() => setIsExpanded(true)} />
+            <ChatInterface
+              compact
+              onRequestExpand={() => setIsExpanded(true)}
+            />
           </div>
         </div>
       )}

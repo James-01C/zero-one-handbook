@@ -8,9 +8,7 @@ interface CardGridProps {
 }
 
 export function CardGrid({ children }: CardGridProps) {
-  return (
-    <div className="my-6 grid gap-3 sm:grid-cols-2">{children}</div>
-  );
+  return <div className="my-6 grid gap-3 sm:grid-cols-2">{children}</div>;
 }
 
 interface CardProps {
@@ -24,7 +22,9 @@ export function Card({ title, href, icon, children }: CardProps) {
   const content = (
     <>
       <div className="flex items-center gap-2">
-        {icon && <SectionIcon icon={icon} className="size-4 text-muted-foreground" />}
+        {icon && (
+          <SectionIcon icon={icon} className="size-4 text-muted-foreground" />
+        )}
         <span className="text-sm font-semibold text-foreground">{title}</span>
       </div>
       <div className="mt-1 text-sm text-muted-foreground [&>:last-child]:mb-0">

@@ -75,13 +75,17 @@ export function Callout({ type, children }: CalloutProps) {
         <span
           className={cn(
             'text-sm font-semibold',
-            isTldr ? 'text-muted-foreground uppercase tracking-wider' : 'text-foreground'
+            isTldr
+              ? 'text-muted-foreground uppercase tracking-wider'
+              : 'text-foreground'
           )}
         >
           {c.label}
         </span>
       </div>
-      <div className="callout-body text-sm [&>:last-child]:mb-0">{children}</div>
+      <div className="callout-body text-sm [&>:last-child]:mb-0">
+        {children}
+      </div>
     </div>
   );
 }

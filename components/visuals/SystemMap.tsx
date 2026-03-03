@@ -173,10 +173,7 @@ export function SystemMap() {
                 </div>
                 <ul className="space-y-0.5">
                   {conn.labels.map((label, j) => (
-                    <li
-                      key={j}
-                      className="text-xs text-muted-foreground"
-                    >
+                    <li key={j} className="text-xs text-muted-foreground">
                       {label}
                     </li>
                   ))}

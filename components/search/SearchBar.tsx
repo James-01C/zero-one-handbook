@@ -3,7 +3,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search } from 'lucide-react';
-import { useSearch, type SearchResultItem } from '@/components/search/SearchProvider';
+import {
+  useSearch,
+  type SearchResultItem,
+} from '@/components/search/SearchProvider';
 import { TypeBadge } from '@/components/content/TypeBadge';
 
 export function SearchBar() {
@@ -79,9 +82,7 @@ export function SearchBar() {
 
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setSelectedIndex((prev) =>
-        prev < results.length - 1 ? prev + 1 : prev
-      );
+      setSelectedIndex((prev) => (prev < results.length - 1 ? prev + 1 : prev));
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
@@ -105,7 +106,10 @@ export function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative ml-auto flex-1 md:max-w-sm">
+    <form
+      onSubmit={handleSubmit}
+      className="relative ml-auto flex-1 md:max-w-sm"
+    >
       <div className="relative">
         <Search className="absolute left-2.5 top-2.5 size-4 text-muted-foreground" />
         <input

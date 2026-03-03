@@ -42,7 +42,8 @@ export function SectionCard({ section }: SectionCardProps) {
         <div className="flex-1">
           <h2 className="font-semibold leading-tight">{section.title}</h2>
           <p className="text-xs text-muted-foreground">
-            {section.pages.length} {section.pages.length === 1 ? 'page' : 'pages'}
+            {section.pages.length}{' '}
+            {section.pages.length === 1 ? 'page' : 'pages'}
           </p>
         </div>
       </div>

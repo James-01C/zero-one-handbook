@@ -6,17 +6,19 @@ Use this when adding, editing, or reorganising handbook content.
 
 1. Create the markdown file in the correct section directory: `content/[section]/[slug].md`
 2. Add complete frontmatter:
+
 ```yaml
 ---
-title: "Page Title"
-type: "sop"          # sop | reference | policy | guide
+title: 'Page Title'
+type: 'sop' # sop | reference | policy | guide
 roles:
-  - developer        # developer | management | all
-summary: "One-line description"
-version: "1.0"
-lastUpdated: "2026-02-26"
+  - developer # developer | management | all
+summary: 'One-line description'
+version: '1.0'
+lastUpdated: '2026-02-26'
 ---
 ```
+
 3. Write content appropriate for the type:
    - **sop**: Use `## Step 1: Title` headings for each step. Keep steps atomic and actionable.
    - **reference**: Use tables and structured data. Headings for sections.
@@ -28,6 +30,7 @@ lastUpdated: "2026-02-26"
 
 1. Create the directory: `content/[section-name]/`
 2. Add `_section.json`:
+
 ```json
 {
   "title": "Section Title",
@@ -36,6 +39,7 @@ lastUpdated: "2026-02-26"
   "sortOrder": 5
 }
 ```
+
 3. Add at least one page in the section.
 
 ## Content Type Guidelines

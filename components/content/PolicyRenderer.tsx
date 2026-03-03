@@ -78,16 +78,25 @@ function parsePolicySections(markdown: string): {
 
 const policyMdxComponents = {
   h3: (props: ComponentPropsWithoutRef<'h3'>) => (
-    <h3 className="mb-2 mt-6 text-base font-semibold text-foreground first:mt-0" {...props} />
+    <h3
+      className="mb-2 mt-6 text-base font-semibold text-foreground first:mt-0"
+      {...props}
+    />
   ),
   p: (props: ComponentPropsWithoutRef<'p'>) => (
     <p className="mb-3 leading-7 text-muted-foreground last:mb-0" {...props} />
   ),
   ul: (props: ComponentPropsWithoutRef<'ul'>) => (
-    <ul className="mb-3 ml-6 list-disc space-y-1 text-muted-foreground last:mb-0" {...props} />
+    <ul
+      className="mb-3 ml-6 list-disc space-y-1 text-muted-foreground last:mb-0"
+      {...props}
+    />
   ),
   ol: (props: ComponentPropsWithoutRef<'ol'>) => (
-    <ol className="mb-3 ml-6 list-decimal space-y-1 text-muted-foreground last:mb-0" {...props} />
+    <ol
+      className="mb-3 ml-6 list-decimal space-y-1 text-muted-foreground last:mb-0"
+      {...props}
+    />
   ),
   li: (props: ComponentPropsWithoutRef<'li'>) => (
     <li className="leading-7" {...props} />
@@ -96,13 +105,22 @@ const policyMdxComponents = {
     <strong className="font-semibold text-foreground" {...props} />
   ),
   a: (props: ComponentPropsWithoutRef<'a'>) => (
-    <a className="font-medium text-primary underline underline-offset-4 hover:text-primary/80" {...props} />
+    <a
+      className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
+      {...props}
+    />
   ),
   code: (props: ComponentPropsWithoutRef<'code'>) => (
-    <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground" {...props} />
+    <code
+      className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground"
+      {...props}
+    />
   ),
   blockquote: (props: ComponentPropsWithoutRef<'blockquote'>) => (
-    <blockquote className="mb-3 border-l-4 border-amber-500/40 bg-amber-500/5 py-2 pl-4 text-muted-foreground last:mb-0" {...props} />
+    <blockquote
+      className="mb-3 border-l-4 border-amber-500/40 bg-amber-500/5 py-2 pl-4 text-muted-foreground last:mb-0"
+      {...props}
+    />
   ),
   ...tableComponents,
   ...customComponents,
@@ -110,7 +128,10 @@ const policyMdxComponents = {
 
 const tldrComponents = {
   p: (props: ComponentPropsWithoutRef<'p'>) => (
-    <p className="text-sm leading-relaxed text-foreground last:mb-0" {...props} />
+    <p
+      className="text-sm leading-relaxed text-foreground last:mb-0"
+      {...props}
+    />
   ),
   strong: (props: ComponentPropsWithoutRef<'strong'>) => (
     <strong className="font-semibold" {...props} />

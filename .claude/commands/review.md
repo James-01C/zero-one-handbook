@@ -1,6 +1,7 @@
 Review all modified files in this session against the project conventions in CLAUDE.md and .claude/rules/.
 
 Check for:
+
 1. TypeScript errors or missing types
 2. Components missing "use client" when they need it, or having it when they don't
 3. Content files with missing or malformed frontmatter

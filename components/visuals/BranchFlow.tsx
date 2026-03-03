@@ -253,7 +253,10 @@ export function BranchFlow() {
         </div>
         <div className="divide-y divide-border">
           {mergePoints.map((mp, i) => (
-            <div key={i} className="flex items-center gap-4 px-4 py-2.5 text-sm">
+            <div
+              key={i}
+              className="flex items-center gap-4 px-4 py-2.5 text-sm"
+            >
               <span className="min-w-0 flex-1 truncate font-mono text-xs">
                 {mp.from} → {mp.to}
               </span>

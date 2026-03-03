@@ -25,7 +25,10 @@ const SUGGESTED_QUESTIONS = [
   'What happens when a version is released?',
 ];
 
-export function ChatInterface({ compact = false, onRequestExpand }: ChatInterfaceProps) {
+export function ChatInterface({
+  compact = false,
+  onRequestExpand,
+}: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -138,10 +141,7 @@ export function ChatInterface({ compact = false, onRequestExpand }: ChatInterfac
       const decoder = new TextDecoder();
       let assistantContent = '';
 
-      setMessages((prev) => [
-        ...prev,
-        { role: 'assistant', content: '' },
-      ]);
+      setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
 
       while (true) {
         const { done, value } = await reader.read();
@@ -227,8 +227,8 @@ export function ChatInterface({ compact = false, onRequestExpand }: ChatInterfac
             <div className="text-center">
               <div className="text-lg font-semibold">Ask Amara</div>
               <p className="mt-1 text-sm text-muted-foreground">
-                Your handbook assistant. Ask about workflows, Git
-                procedures, Jira conventions, and more.
+                Your handbook assistant. Ask about workflows, Git procedures,
+                Jira conventions, and more.
               </p>
             </div>
 

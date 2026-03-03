@@ -36,14 +36,15 @@ export function SearchProvider({ items, children }: SearchProviderProps) {
   const fuse = useMemo(() => new Fuse(items, fuseOptions), [items]);
 
   const searchFn = useMemo(
-    () => (query: string, limit?: number): SearchResultItem[] => {
-      if (!query.trim()) return [];
-      const results = fuse.search(query);
-      return (limit ? results.slice(0, limit) : results).map((r) => ({
-        item: r.item,
-        score: r.score ?? 1,
-      }));
-    },
+    () =>
+      (query: string, limit?: number): SearchResultItem[] => {
+        if (!query.trim()) return [];
+        const results = fuse.search(query);
+        return (limit ? results.slice(0, limit) : results).map((r) => ({
+          item: r.item,
+          score: r.score ?? 1,
+        }));
+      },
     [fuse]
   );
 

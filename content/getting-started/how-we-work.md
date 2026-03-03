@@ -1,24 +1,24 @@
 ---
-title: "How We Work"
-type: "guide"
+title: 'How We Work'
+type: 'guide'
 roles:
   - developer
   - all
-summary: "The four platforms, how they connect, and your daily workflow loop."
-version: "1.0"
-lastUpdated: "2026-03-02"
+summary: 'The four platforms, how they connect, and your daily workflow loop.'
+version: '1.0'
+lastUpdated: '2026-03-02'
 ---
 
 ## The Four Platforms
 
 We use four platforms. Each one owns a specific part of the workflow.
 
-| Platform | What It Owns | Core Principle |
-|----------|-------------|----------------|
-| **GitHub** | Code, version numbers (tags), developer-facing docs (READMEs, architecture, contribution guide) | Source of truth for code and versions |
-| **Jira** | Work tracking (sprint board, backlog), bug tracking, product ideas (Product Discovery) | Where work is planned, tracked, and measured |
-| **Slack** | Real-time communication, automated alerts, coordination | A river, not a lake — information flows through, but anything permanent lands in Jira, Notion, or GitHub |
-| **Notion** | Knowledge base, company processes, decision records, this handbook | Where knowledge and decisions live |
+| Platform   | What It Owns                                                                                    | Core Principle                                                                                           |
+| ---------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **GitHub** | Code, version numbers (tags), developer-facing docs (READMEs, architecture, contribution guide) | Source of truth for code and versions                                                                    |
+| **Jira**   | Work tracking (sprint board, backlog), bug tracking, product ideas (Product Discovery)          | Where work is planned, tracked, and measured                                                             |
+| **Slack**  | Real-time communication, automated alerts, coordination                                         | A river, not a lake — information flows through, but anything permanent lands in Jira, Notion, or GitHub |
+| **Notion** | Knowledge base, company processes, decision records, this handbook                              | Where knowledge and decisions live                                                                       |
 
 ### The Boundary Rule
 
@@ -33,13 +33,13 @@ When you're not sure where something goes:
 
 The systems aren't isolated — they link through naming conventions and automations.
 
-| Connection | What Flows | How |
-|-----------|-----------|-----|
-| **GitHub ↔ Jira** | Branch → ticket linking | Branch name contains `DEV-###`, Jira auto-detects |
-| **GitHub ↔ Jira** | Version alignment | Fix Version `Plugin 1.2.0` = Git tag `plugin/v1.2.0` = dev branch `dev/1.2.0` |
-| **GitHub ↔ Jira** | Component alignment | Same four components in both systems |
-| **GitHub → Slack** | Deployment notifications | GitHub Actions → Slack webhook |
-| **Slack → Notion** | Daily progress updates | Automated via n8n |
+| Connection         | What Flows               | How                                                                           |
+| ------------------ | ------------------------ | ----------------------------------------------------------------------------- |
+| **GitHub ↔ Jira**  | Branch → ticket linking  | Branch name contains `DEV-###`, Jira auto-detects                             |
+| **GitHub ↔ Jira**  | Version alignment        | Fix Version `Plugin 1.2.0` = Git tag `plugin/v1.2.0` = dev branch `dev/1.2.0` |
+| **GitHub ↔ Jira**  | Component alignment      | Same four components in both systems                                          |
+| **GitHub → Slack** | Deployment notifications | GitHub Actions → Slack webhook                                                |
+| **Slack → Notion** | Daily progress updates   | Automated via n8n                                                             |
 
 ## The Naming Thread
 
@@ -94,17 +94,17 @@ Pick up next task → repeat
 
 ### Tools by Activity
 
-| Activity | Tool |
-|----------|------|
-| See what to work on | Jira board |
-| Write and commit code | GitHub + terminal |
-| Get code reviewed | GitHub PRs |
-| Track task progress | Jira (move across board) |
-| Report a bug | Slack → Jira |
-| Coordinate staging | Slack #dev-staging-deploys |
-| Ship a release | GitHub → tag → Jira mark released → Slack announce |
-| Find how something works | This handbook |
-| Find how code works | GitHub repo docs |
+| Activity                 | Tool                                               |
+| ------------------------ | -------------------------------------------------- |
+| See what to work on      | Jira board                                         |
+| Write and commit code    | GitHub + terminal                                  |
+| Get code reviewed        | GitHub PRs                                         |
+| Track task progress      | Jira (move across board)                           |
+| Report a bug             | Slack → Jira                                       |
+| Coordinate staging       | Slack #dev-staging-deploys                         |
+| Ship a release           | GitHub → tag → Jira mark released → Slack announce |
+| Find how something works | This handbook                                      |
+| Find how code works      | GitHub repo docs                                   |
 
 ## What's Automated vs Manual
 
@@ -133,20 +133,20 @@ Pick up next task → repeat
 
 ## Slack Channels
 
-| Channel | What Goes Here |
-|---------|---------------|
-| **dev-amara** | Main dev discussion — questions, decisions, general coordination |
-| **dev-progress-reports** | Team updates + automated daily digest |
-| **dev-bug-reports** | Bug discussion. Confirmed bugs get a Jira ticket. |
-| **#dev-staging-deploys** | Announce what you're deploying to staging. Check before deploying. |
-| **dev-backend-supabase, dev-cloud, dev-frontend, dev-mesh-gen, dev-pcg, dev-website** | Component-specific technical discussion |
+| Channel                                                                               | What Goes Here                                                     |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| **dev-amara**                                                                         | Main dev discussion — questions, decisions, general coordination   |
+| **dev-progress-reports**                                                              | Team updates + automated daily digest                              |
+| **dev-bug-reports**                                                                   | Bug discussion. Confirmed bugs get a Jira ticket.                  |
+| **#dev-staging-deploys**                                                              | Announce what you're deploying to staging. Check before deploying. |
+| **dev-backend-supabase, dev-cloud, dev-frontend, dev-mesh-gen, dev-pcg, dev-website** | Component-specific technical discussion                            |
 
 ### Where Do I Post This?
 
-| Situation | Channel |
-|-----------|---------|
-| Found a bug or think something's broken | dev-bug-reports |
-| About to deploy to staging | #dev-staging-deploys |
-| General dev question or discussion | dev-amara |
-| Component-specific technical discussion | The relevant dev-* channel |
-| Progress update | dev-progress-reports |
+| Situation                               | Channel                     |
+| --------------------------------------- | --------------------------- |
+| Found a bug or think something's broken | dev-bug-reports             |
+| About to deploy to staging              | #dev-staging-deploys        |
+| General dev question or discussion      | dev-amara                   |
+| Component-specific technical discussion | The relevant dev-\* channel |
+| Progress update                         | dev-progress-reports        |

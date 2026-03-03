@@ -18,7 +18,7 @@ const tabs = [
     id: 'ticket-lifecycle',
     label: 'Ticket Lifecycle',
     shortLabel: 'Lifecycle',
-    description: 'A ticket\'s journey from idea to release',
+    description: "A ticket's journey from idea to release",
   },
   {
     id: 'branch-flow',

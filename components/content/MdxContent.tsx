@@ -34,7 +34,10 @@ const mdxComponents = {
     <p className="mb-4 leading-7 text-muted-foreground" {...props} />
   ),
   ul: (props: ComponentPropsWithoutRef<'ul'>) => (
-    <ul className="mb-4 ml-6 list-disc space-y-1 text-muted-foreground" {...props} />
+    <ul
+      className="mb-4 ml-6 list-disc space-y-1 text-muted-foreground"
+      {...props}
+    />
   ),
   ol: (props: ComponentPropsWithoutRef<'ol'>) => (
     <ol

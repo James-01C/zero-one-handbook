@@ -7,9 +7,7 @@ export default function Home() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">
-          Zero One Handbook
-        </h1>
+        <h1 className="text-3xl font-bold tracking-tight">Zero One Handbook</h1>
         <p className="mt-2 text-muted-foreground">
           SOPs, reference docs, policies, and guides for the Zero One Creative
           team.

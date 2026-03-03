@@ -10,8 +10,8 @@ export default function ChatPage() {
           Ask Amara
         </h1>
         <p className="mt-1 text-muted-foreground">
-          Ask questions about workflows, Git procedures, Jira conventions,
-          and anything else in the handbook.
+          Ask questions about workflows, Git procedures, Jira conventions, and
+          anything else in the handbook.
         </p>
       </div>
 

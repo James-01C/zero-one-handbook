@@ -55,8 +55,7 @@ export async function POST(request: Request) {
     return Response.json(
       {
         error: 'chat_unavailable',
-        message:
-          'Chat is not configured. Try searching the handbook instead.',
+        message: 'Chat is not configured. Try searching the handbook instead.',
       },
       { status: 503 }
     );
@@ -70,10 +69,7 @@ export async function POST(request: Request) {
   }
 
   if (!body.message || typeof body.message !== 'string') {
-    return Response.json(
-      { error: 'Message is required' },
-      { status: 400 }
-    );
+    return Response.json({ error: 'Message is required' }, { status: 400 });
   }
 
   const client = new Anthropic({ apiKey });
@@ -105,7 +101,9 @@ export async function POST(request: Request) {
               event.delta.type === 'text_delta'
             ) {
               controller.enqueue(
-                encoder.encode(`data: ${JSON.stringify({ text: event.delta.text })}\n\n`)
+                encoder.encode(
+                  `data: ${JSON.stringify({ text: event.delta.text })}\n\n`
+                )
               );
             }
           }
@@ -134,7 +132,8 @@ export async function POST(request: Request) {
     return Response.json(
       {
         error: 'api_error',
-        message: 'Failed to get a response. Try searching the handbook instead.',
+        message:
+          'Failed to get a response. Try searching the handbook instead.',
       },
       { status: 500 }
     );

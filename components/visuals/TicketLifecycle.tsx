@@ -74,7 +74,7 @@ const stages: Stage[] = [
     platforms: ['Jira'],
     description: 'Epic owner reviews and closes',
     detail:
-      'Epics don\'t auto-close. The owner makes a deliberate decision — this is a quality gate.',
+      "Epics don't auto-close. The owner makes a deliberate decision — this is a quality gate.",
   },
   {
     number: 9,
@@ -97,8 +97,7 @@ const stages: Stage[] = [
 const platformColors: Record<string, string> = {
   JPD: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300',
   Jira: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300',
-  GitHub:
-    'bg-zinc-100 text-zinc-800 dark:bg-zinc-700/60 dark:text-zinc-300',
+  GitHub: 'bg-zinc-100 text-zinc-800 dark:bg-zinc-700/60 dark:text-zinc-300',
   Slack:
     'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300',
 };
@@ -120,9 +119,7 @@ export function TicketLifecycle() {
           return (
             <button
               key={stage.number}
-              onClick={() =>
-                setExpandedStage(isExpanded ? null : stage.number)
-              }
+              onClick={() => setExpandedStage(isExpanded ? null : stage.number)}
               className={cn(
                 'group w-full rounded-lg border border-border p-3 text-left transition-all duration-200',
                 isExpanded

@@ -59,9 +59,7 @@ export function SidebarNav({ sections, onNavigate }: SidebarNavProps) {
               onClick={() => toggleSection(section.slug)}
               className={cn(
                 'flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
-                isSectionActive
-                  ? 'text-foreground'
-                  : 'text-muted-foreground'
+                isSectionActive ? 'text-foreground' : 'text-muted-foreground'
               )}
             >
               <SectionIcon icon={section.icon} className="size-4" />

@@ -72,10 +72,7 @@ export default async function ContentPage({ params }: ContentPageProps) {
 
   return (
     <div>
-      <Breadcrumbs
-        sectionTitle={section?.title}
-        pageTitle={page.meta.title}
-      />
+      <Breadcrumbs sectionTitle={section?.title} pageTitle={page.meta.title} />
 
       {/* Metadata bar */}
       <div className="mb-6">

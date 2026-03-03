@@ -1,22 +1,22 @@
 ---
-title: "Git Procedures"
+title: 'Git Procedures'
 order: 2
-type: "sop"
+type: 'sop'
 roles:
   - developer
-summary: "Five step-by-step procedures: start a feature, finish a feature, promote to staging, release to prod, and hotfix."
-version: "1.0"
-lastUpdated: "2026-03-02"
+summary: 'Five step-by-step procedures: start a feature, finish a feature, promote to staging, release to prod, and hotfix.'
+version: '1.0'
+lastUpdated: '2026-03-02'
 ---
 
 Five procedures covering the full Git workflow. All merges happen via GitHub Pull Requests — select the merge strategy using the PR dropdown, not local git commands.
 
-| Procedure | GitHub Merge Button | Who |
-|-----------|-------------------|-----|
-| Feature → dev/X.Y.Z | **Squash and merge** | Any developer |
-| dev/X.Y.Z → staging | **Merge commit** | Coordinate in channel first |
-| staging → prod | **Merge commit** | Dev branch owner, after team confirmation |
-| hotfix → staging or prod | **Merge commit** | Hotfix author + reviewer |
+| Procedure                | GitHub Merge Button  | Who                                       |
+| ------------------------ | -------------------- | ----------------------------------------- |
+| Feature → dev/X.Y.Z      | **Squash and merge** | Any developer                             |
+| dev/X.Y.Z → staging      | **Merge commit**     | Coordinate in channel first               |
+| staging → prod           | **Merge commit**     | Dev branch owner, after team confirmation |
+| hotfix → staging or prod | **Merge commit**     | Hotfix author + reviewer                  |
 
 ## Step 1: Start a Feature
 
@@ -183,7 +183,7 @@ git merge hotfix/1.2.1
 git push origin dev/1.3.0
 ```
 
-Repeat for every active dev/* branch.
+Repeat for every active dev/\* branch.
 
 Clean up:
 

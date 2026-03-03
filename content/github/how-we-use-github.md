@@ -1,16 +1,17 @@
 ---
-title: "How We Use GitHub"
+title: 'How We Use GitHub'
 order: 1
-type: "guide"
+type: 'guide'
 roles:
   - developer
   - all
-summary: "Repository structure, branching model, merge strategies, and how GitHub connects to Jira."
-version: "1.0"
-lastUpdated: "2026-03-02"
+summary: 'Repository structure, branching model, merge strategies, and how GitHub connects to Jira.'
+version: '1.0'
+lastUpdated: '2026-03-02'
 ---
 
 > [!TLDR]
+>
 > - GitHub is where code lives. Everything else is in Jira, Notion, or Slack.
 > - Four components, independently versioned: Plugin, PluginBackend, MeshGen, Website.
 > - Branch flow: feature → dev → staging → prod (squash, merge, merge).
@@ -29,12 +30,12 @@ Everything else — task tracking, sprint planning, company processes — lives 
 
 We have four independently versioned components, each following semantic versioning (MAJOR.MINOR.PATCH):
 
-| Component | What It Is | Tag Prefix | Repo Location |
-|-----------|-----------|------------|---------------|
-| **Plugin** | UE5 plugin source | `plugin/` | Monorepo (`interfaces/UE5plugin/`) |
-| **PluginBackend** | API interface, MCP client, and asset ingestion — versioned as one unit | `backend/` | Monorepo (`backend/`) |
-| **Website** | Next.js frontend | `website/` | Monorepo (`interfaces/frontend/`) |
-| **MeshGen** | Mesh generation server | `meshgen/` | Separate repo (`01C-Amara/amara-mesh-gen`) |
+| Component         | What It Is                                                             | Tag Prefix | Repo Location                              |
+| ----------------- | ---------------------------------------------------------------------- | ---------- | ------------------------------------------ |
+| **Plugin**        | UE5 plugin source                                                      | `plugin/`  | Monorepo (`interfaces/UE5plugin/`)         |
+| **PluginBackend** | API interface, MCP client, and asset ingestion — versioned as one unit | `backend/` | Monorepo (`backend/`)                      |
+| **Website**       | Next.js frontend                                                       | `website/` | Monorepo (`interfaces/frontend/`)          |
+| **MeshGen**       | Mesh generation server                                                 | `meshgen/` | Separate repo (`01C-Amara/amara-mesh-gen`) |
 
 Each component gets its own Git tags (e.g. `plugin/v1.2.0`, `backend/v1.2.0`). When we release, we only tag the components that actually changed.
 
@@ -84,11 +85,11 @@ Work doesn't stop while a version is being tested. When `dev/1.2.0` has been pro
 
 ## Merge Strategies
 
-| Merge | Strategy | Why |
-|-------|----------|-----|
-| Feature → dev | **Squash and merge** | Clean single commit per feature. Keeps dev history readable. |
-| Dev → staging | **Merge commit** | Preserves full history. Safe on shared branches. |
-| Staging → prod | **Merge commit** | Preserves history, clear promotion record. |
+| Merge          | Strategy             | Why                                                          |
+| -------------- | -------------------- | ------------------------------------------------------------ |
+| Feature → dev  | **Squash and merge** | Clean single commit per feature. Keeps dev history readable. |
+| Dev → staging  | **Merge commit**     | Preserves full history. Safe on shared branches.             |
+| Staging → prod | **Merge commit**     | Preserves history, clear promotion record.                   |
 
 All merges happen via GitHub Pull Requests. Select the strategy using the PR dropdown.
 
@@ -112,6 +113,7 @@ Three rules that prevent most Git headaches:
 Format: `DEV-###: description`
 
 Examples:
+
 - `DEV-501: implement rate limiter middleware`
 - `DEV-342: fix auth bypass on websocket reconnect`
 

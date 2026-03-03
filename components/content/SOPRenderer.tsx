@@ -62,35 +62,61 @@ function parseSteps(markdown: string): { intro: string; steps: StepData[] } {
 
 const stepMdxComponents = {
   h3: (props: ComponentPropsWithoutRef<'h3'>) => (
-    <h3 className="mb-2 mt-4 text-sm font-semibold text-foreground first:mt-0" {...props} />
+    <h3
+      className="mb-2 mt-4 text-sm font-semibold text-foreground first:mt-0"
+      {...props}
+    />
   ),
   p: (props: ComponentPropsWithoutRef<'p'>) => (
-    <p className="mb-3 text-sm leading-relaxed text-muted-foreground last:mb-0" {...props} />
+    <p
+      className="mb-3 text-sm leading-relaxed text-muted-foreground last:mb-0"
+      {...props}
+    />
   ),
   ul: (props: ComponentPropsWithoutRef<'ul'>) => (
-    <ul className="mb-3 ml-4 list-disc space-y-1 text-sm text-muted-foreground last:mb-0" {...props} />
+    <ul
+      className="mb-3 ml-4 list-disc space-y-1 text-sm text-muted-foreground last:mb-0"
+      {...props}
+    />
   ),
   ol: (props: ComponentPropsWithoutRef<'ol'>) => (
-    <ol className="mb-3 ml-4 list-decimal space-y-1 text-sm text-muted-foreground last:mb-0" {...props} />
+    <ol
+      className="mb-3 ml-4 list-decimal space-y-1 text-sm text-muted-foreground last:mb-0"
+      {...props}
+    />
   ),
   li: (props: ComponentPropsWithoutRef<'li'>) => (
     <li className="leading-relaxed" {...props} />
   ),
   a: (props: ComponentPropsWithoutRef<'a'>) => (
-    <a className="font-medium text-primary underline underline-offset-4 hover:text-primary/80" {...props} />
+    <a
+      className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
+      {...props}
+    />
   ),
   code: (props: ComponentPropsWithoutRef<'code'>) => {
     const isInline = !props.className;
     if (isInline) {
-      return <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground" {...props} />;
+      return (
+        <code
+          className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground"
+          {...props}
+        />
+      );
     }
     return <code className="font-mono text-xs" {...props} />;
   },
   pre: (props: ComponentPropsWithoutRef<'pre'>) => (
-    <pre className="mb-3 overflow-x-auto rounded-md bg-zinc-900 p-3 font-mono text-xs text-zinc-100 dark:bg-zinc-800/50 last:mb-0" {...props} />
+    <pre
+      className="mb-3 overflow-x-auto rounded-md bg-zinc-900 p-3 font-mono text-xs text-zinc-100 dark:bg-zinc-800/50 last:mb-0"
+      {...props}
+    />
   ),
   blockquote: (props: ComponentPropsWithoutRef<'blockquote'>) => (
-    <blockquote className="mb-3 border-l-2 border-amber-500/50 bg-amber-500/5 pl-3 text-sm italic text-muted-foreground last:mb-0" {...props} />
+    <blockquote
+      className="mb-3 border-l-2 border-amber-500/50 bg-amber-500/5 pl-3 text-sm italic text-muted-foreground last:mb-0"
+      {...props}
+    />
   ),
   strong: (props: ComponentPropsWithoutRef<'strong'>) => (
     <strong className="font-semibold text-foreground" {...props} />
@@ -104,16 +130,25 @@ const introMdxComponents = {
     <p className="mb-4 leading-7 text-muted-foreground" {...props} />
   ),
   ul: (props: ComponentPropsWithoutRef<'ul'>) => (
-    <ul className="mb-4 ml-6 list-disc space-y-1 text-muted-foreground" {...props} />
+    <ul
+      className="mb-4 ml-6 list-disc space-y-1 text-muted-foreground"
+      {...props}
+    />
   ),
   blockquote: (props: ComponentPropsWithoutRef<'blockquote'>) => (
-    <blockquote className="mb-4 border-l-4 border-primary/30 pl-4 italic text-muted-foreground" {...props} />
+    <blockquote
+      className="mb-4 border-l-4 border-primary/30 pl-4 italic text-muted-foreground"
+      {...props}
+    />
   ),
   strong: (props: ComponentPropsWithoutRef<'strong'>) => (
     <strong className="font-semibold text-foreground" {...props} />
   ),
   code: (props: ComponentPropsWithoutRef<'code'>) => (
-    <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground" {...props} />
+    <code
+      className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground"
+      {...props}
+    />
   ),
   ...tableComponents,
   ...customComponents,

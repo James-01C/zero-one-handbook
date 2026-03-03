@@ -44,6 +44,7 @@ types/content.ts      → Section, Page, ContentMeta, ContentType, Role
 Content is markdown in `/content/[section]/[slug].md`. Each section has a `_section.json` config. Frontmatter: title, type (sop|reference|policy|guide), roles, summary, version, lastUpdated, order (optional).
 
 Visual components available in MDX content:
+
 - Callout syntax: `> [!RULE]`, `> [!TIP]`, `> [!INFO]`, `> [!TLDR]` — transformed by remark plugin
 - JSX components: `<Flow>`, `<Step>`, `<Arrow>`, `<DefList>`, `<Def>`, `<CardGrid>`, `<Card>`
 - All registered in `lib/mdx.tsx` shared component map

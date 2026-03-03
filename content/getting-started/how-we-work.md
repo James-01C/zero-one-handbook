@@ -5,29 +5,45 @@ roles:
   - developer
   - all
 summary: 'The four platforms, how they connect, and your daily workflow loop.'
-version: '1.0'
-lastUpdated: '2026-03-02'
+version: '1.1'
+lastUpdated: '2026-03-03'
 ---
+
+> [!TLDR]
+>
+> - **Four platforms, four jobs:** GitHub (code), Jira (work tracking), Slack (communication), Notion (knowledge)
+> - **Naming connects everything:** ticket keys, component names, and version numbers link all systems automatically
+> - **Your loop:** pick up task → branch → code → PR → merge → move ticket to Done
+> - **Know what's automatic vs manual** — if an automation breaks, flag it, don't just do it manually
+
+> [!TIP] See it visually
+> The [System Overview](/visuals) page has interactive diagrams for the system map, ticket lifecycle, and branch flow.
 
 ## The Four Platforms
 
 We use four platforms. Each one owns a specific part of the workflow.
 
-| Platform   | What It Owns                                                                                    | Core Principle                                                                                           |
-| ---------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| **GitHub** | Code, version numbers (tags), developer-facing docs (READMEs, architecture, contribution guide) | Source of truth for code and versions                                                                    |
-| **Jira**   | Work tracking (sprint board, backlog), bug tracking, product ideas (Product Discovery)          | Where work is planned, tracked, and measured                                                             |
-| **Slack**  | Real-time communication, automated alerts, coordination                                         | A river, not a lake — information flows through, but anything permanent lands in Jira, Notion, or GitHub |
-| **Notion** | Knowledge base, company processes, decision records, this handbook                              | Where knowledge and decisions live                                                                       |
+| Platform   | What It Owns                                                                                    | Core Principle                               |
+| ---------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| **GitHub** | Code, version numbers (tags), developer-facing docs (READMEs, architecture, contribution guide) | Source of truth for code and versions        |
+| **Jira**   | Work tracking (sprint board, backlog), bug tracking, product ideas (Product Discovery)          | Where work is planned, tracked, and measured |
+| **Slack**  | Real-time communication, automated alerts, coordination                                         | Real-time coordination — see callout below   |
+| **Notion** | Knowledge base, company processes, decision records, this handbook                              | Where knowledge and decisions live           |
+
+> [!INFO] Slack is a river, not a lake
+> Information flows through Slack, but anything that needs to be found later lands in Jira, Notion, or GitHub. If a decision is made in Slack, record it somewhere permanent.
 
 ### The Boundary Rule
 
-When you're not sure where something goes:
+> [!TIP] The Boundary Rule
+> When you're not sure where something goes:
+>
+> - **Need it to write code?** → GitHub repo docs
+> - **Need to track or plan work?** → Jira
+> - **Need to tell someone now?** → Slack
+> - **Need to know how the company works?** → This handbook
 
-- **Need it to write code?** → GitHub repo docs (README, architecture, setup)
-- **Need it to track or plan work?** → Jira
-- **Need to tell someone now?** → Slack
-- **Need to know how the company works?** → This handbook
+---
 
 ## How the Platforms Connect
 
@@ -41,9 +57,14 @@ The systems aren't isolated — they link through naming conventions and automat
 | **GitHub → Slack** | Deployment notifications | GitHub Actions → Slack webhook                                                |
 | **Slack → Notion** | Daily progress updates   | Automated via n8n                                                             |
 
+---
+
 ## The Naming Thread
 
 Consistent naming is what makes everything self-linking. Three anchors tie it all together:
+
+> [!INFO] One name, everywhere
+> A single naming convention threads through all four systems. No manual linking required — just follow the pattern and the tools connect automatically.
 
 ### Anchor 1: Jira Ticket Key → connects Jira to GitHub
 
@@ -76,21 +97,25 @@ Jira version:       Released            (record)
 Slack:              "Plugin 1.2.0 shipped"  (notification)
 ```
 
+---
+
 ## Your Daily Loop
 
-```
-Morning: Check Jira board → pick up task → move to In Progress
-    ↓
-Start work: Create feature branch (feature/DEV-###-description)
-    ↓
-During day: Code in GitHub, commit with DEV-###, push
-    ↓
-When done: Open PR against dev/X.Y.Z → move ticket to In Review
-    ↓
-After review: Squash merge, delete branch → move ticket to Done → write Resolution Summary
-    ↓
-Pick up next task → repeat
-```
+<Flow>
+  <Step color="blue">Check board</Step>
+  <Arrow label="pick task" />
+  <Step color="blue">In Progress</Step>
+  <Arrow label="branch" />
+  <Step color="green">feature/DEV-###</Step>
+  <Arrow label="code" />
+  <Step color="green">Commit & push</Step>
+  <Arrow label="PR" />
+  <Step color="purple">In Review</Step>
+  <Arrow label="merge" />
+  <Step color="green">Squash merge</Step>
+  <Arrow label="done" />
+  <Step color="blue">Done</Step>
+</Flow>
 
 ### Tools by Activity
 
@@ -105,6 +130,8 @@ Pick up next task → repeat
 | Ship a release           | GitHub → tag → Jira mark released → Slack announce |
 | Find how something works | This handbook                                      |
 | Find how code works      | GitHub repo docs                                   |
+
+---
 
 ## What's Automated vs Manual
 
@@ -129,7 +156,10 @@ Pick up next task → repeat
 - Tag components at release
 - Announce staging deployments in Slack
 
-**If something that should be automatic isn't working, flag it — don't just do it manually and move on.**
+> [!RULE] Don't silently work around broken automation
+> If something that should be automatic isn't working, flag it in dev-amara. We fix the system rather than adding manual steps.
+
+---
 
 ## Slack Channels
 

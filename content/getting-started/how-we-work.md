@@ -118,8 +118,8 @@ Slack:              "Plugin 1.2.0 shipped"  (notification)
     <Step color="green">Squash merge, delete branch</Step>
     <svg width="12" height="24" viewBox="0 0 12 24" className="text-muted-foreground shrink-0"><path d="M6 0v18M2 15l4 5 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
     <Step color="blue">Done — write Resolution Summary</Step>
-    <svg width="40" height="32" viewBox="0 0 40 32" className="text-muted-foreground shrink-0"><path d="M20 0v8c0 8-16 8-16 16v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" strokeDasharray="4 3"/><path d="M0 26l4 5 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
-    <span className="text-[11px] font-medium text-muted-foreground">↑ repeat</span>
+    <svg width="12" height="24" viewBox="0 0 12 24" className="text-muted-foreground shrink-0"><path d="M6 0v18M2 15l4 5 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+    <Step>Pick up next task</Step>
   </div>
 </div>
 

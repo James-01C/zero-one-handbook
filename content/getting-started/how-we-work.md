@@ -101,31 +101,30 @@ Slack:              "Plugin 1.2.0 shipped"  (notification)
 
 ## Your Daily Loop
 
-<Flow>
-  <Step color="blue">Check board</Step>
-  <Arrow label="pick task" />
-  <Step color="blue">In Progress</Step>
-  <Arrow label="branch" />
-  <Step color="green">feature/DEV-###</Step>
-  <Arrow label="code" />
-  <Step color="green">Commit & push</Step>
-</Flow>
-
-<div className="flex justify-center -my-4">
-  <svg width="24" height="28" viewBox="0 0 24 28" fill="none" className="text-muted-foreground">
-    <path d="M12 0v22M7 18l5 6 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+<div className="my-6 space-y-0">
+  <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap">
+    <Step color="blue">Check board</Step>
+    <Arrow label="pick task" />
+    <Step color="blue">In Progress</Step>
+    <Arrow label="branch" />
+    <Step color="green">feature/DEV-###</Step>
+    <Arrow label="code" />
+    <Step color="green">Commit & push</Step>
+  </div>
+  <svg width="100%" height="40" viewBox="0 0 600 40" preserveAspectRatio="xMinYMid meet" fill="none" className="text-muted-foreground">
+    <path d="M540 0 C540 20, 20 20, 20 40" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" strokeDasharray="4 3" />
+    <path d="M15 34l5 6 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
   </svg>
+  <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap">
+    <Step color="purple">In Review</Step>
+    <Arrow label="merge" />
+    <Step color="green">Squash merge</Step>
+    <Arrow label="close" />
+    <Step color="blue">Done</Step>
+    <Arrow label="repeat" />
+    <Step color="blue">Next task</Step>
+  </div>
 </div>
-
-<Flow>
-  <Step color="purple">In Review</Step>
-  <Arrow label="merge" />
-  <Step color="green">Squash merge</Step>
-  <Arrow label="close" />
-  <Step color="blue">Done</Step>
-  <Arrow label="repeat" />
-  <Step color="blue">Next task</Step>
-</Flow>
 
 ### Tools by Activity
 

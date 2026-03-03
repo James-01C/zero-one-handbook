@@ -109,12 +109,22 @@ Slack:              "Plugin 1.2.0 shipped"  (notification)
   <Step color="green">feature/DEV-###</Step>
   <Arrow label="code" />
   <Step color="green">Commit & push</Step>
-  <Arrow label="PR" />
+</Flow>
+
+<div className="flex justify-center -my-4">
+  <svg width="24" height="28" viewBox="0 0 24 28" fill="none" className="text-muted-foreground">
+    <path d="M12 0v22M7 18l5 6 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+</div>
+
+<Flow>
   <Step color="purple">In Review</Step>
   <Arrow label="merge" />
   <Step color="green">Squash merge</Step>
-  <Arrow label="done" />
+  <Arrow label="close" />
   <Step color="blue">Done</Step>
+  <Arrow label="repeat" />
+  <Step color="blue">Next task</Step>
 </Flow>
 
 ### Tools by Activity

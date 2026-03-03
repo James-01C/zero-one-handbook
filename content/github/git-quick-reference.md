@@ -5,8 +5,8 @@ type: 'reference'
 roles:
   - developer
 summary: 'Branch naming, commit format, merge strategies, and tag prefixes at a glance.'
-version: '1.0'
-lastUpdated: '2026-03-02'
+version: '1.1'
+lastUpdated: '2026-03-03'
 ---
 
 ## Branch Naming
@@ -21,6 +21,8 @@ lastUpdated: '2026-03-02'
 
 Feature branch descriptions: lowercase, hyphens, brief. The `DEV-###` prefix links the branch to Jira automatically.
 
+---
+
 ## Commit Messages
 
 Format: `DEV-###: description`
@@ -33,6 +35,8 @@ DEV-188: add unit tests for mesh export
 
 Lowercase description. Present tense or imperative. Jira key first.
 
+---
+
 ## Merge Strategies
 
 | Merge          | Strategy             | PR Dropdown Choice      |
@@ -42,14 +46,24 @@ Lowercase description. Present tense or imperative. Jira key first.
 | Staging → prod | **Merge commit**     | "Create a merge commit" |
 | Hotfix → prod  | **Merge commit**     | "Create a merge commit" |
 
-All merges via GitHub Pull Requests. Never merge locally.
+> [!RULE]
+> All merges via GitHub Pull Requests. Never merge locally.
+
+---
 
 ## The Normal Flow
 
-```
-feature/DEV-### → dev/X.Y.Z → staging → prod
-   (squash)        (merge)     (merge)
-```
+<Flow>
+  <Step color="purple">feature/DEV-###</Step>
+  <Arrow label="squash" />
+  <Step color="blue">dev/X.Y.Z</Step>
+  <Arrow label="merge" />
+  <Step color="amber">staging</Step>
+  <Arrow label="merge" />
+  <Step color="red">prod</Step>
+</Flow>
+
+---
 
 ## Tag Prefixes
 
@@ -62,6 +76,8 @@ feature/DEV-### → dev/X.Y.Z → staging → prod
 
 Only tag the components that actually changed in a release.
 
+---
+
 ## Jira Status ↔ Git State
 
 | Jira Status     | What Exists in Git                |
@@ -71,13 +87,20 @@ Only tag the components that actually changed in a release.
 | **In Review**   | PR open against dev/X.Y.Z         |
 | **Done**        | PR merged, feature branch deleted |
 
-"Done" = merged to dev, not released to prod.
+> [!RULE]
+> "Done" means merged to dev, not released to prod. Release tracking happens at the Fix Version level.
+
+---
 
 ## Feature Branch Rules
 
-1. **Never reuse a merged branch.** New work on same ticket = new branch from dev.
-2. **Delete immediately after merge.** Use the GitHub PR "Delete branch" button.
-3. **Only code-change tasks get branches.** Research and scoping tasks stay in Jira only.
+> [!RULE]
+>
+> 1. **Never reuse a merged branch.** New work on same ticket = new branch from dev.
+> 2. **Delete immediately after merge.** Use the GitHub PR "Delete branch" button.
+> 3. **Only code-change tasks get branches.** Research and scoping tasks stay in Jira only.
+
+---
 
 ## Fix Version Mapping
 

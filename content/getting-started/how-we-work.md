@@ -101,28 +101,25 @@ Slack:              "Plugin 1.2.0 shipped"  (notification)
 
 ## Your Daily Loop
 
-<div className="my-6 space-y-0">
-  <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap">
-    <Step color="blue">Check board</Step>
-    <Arrow label="pick task" />
-    <Step color="blue">In Progress</Step>
-    <Arrow label="branch" />
-    <Step color="green">feature/DEV-###</Step>
-    <Arrow label="code" />
-    <Step color="green">Commit & push</Step>
-  </div>
-  <svg width="100%" height="40" viewBox="0 0 600 40" preserveAspectRatio="xMinYMid meet" fill="none" className="text-muted-foreground">
-    <path d="M540 0 C540 20, 20 20, 20 40" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" strokeDasharray="4 3" />
-    <path d="M15 34l5 6 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-  </svg>
-  <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap">
+<div className="my-6 flex items-start gap-4">
+  <div className="flex flex-col items-center gap-0">
+    <Step color="blue">Check board & pick up task</Step>
+    <svg width="12" height="24" viewBox="0 0 12 24" className="text-muted-foreground shrink-0"><path d="M6 0v18M2 15l4 5 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+    <Step color="blue">Move ticket to In Progress</Step>
+    <svg width="12" height="24" viewBox="0 0 12 24" className="text-muted-foreground shrink-0"><path d="M6 0v18M2 15l4 5 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+    <Step color="green">Create feature/DEV-### branch</Step>
+    <svg width="12" height="24" viewBox="0 0 12 24" className="text-muted-foreground shrink-0"><path d="M6 0v18M2 15l4 5 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+    <Step color="green">Code, commit with DEV-###, push</Step>
+    <svg width="12" height="24" viewBox="0 0 12 24" className="text-muted-foreground shrink-0"><path d="M6 0v18M2 15l4 5 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+    <Step color="green">Open PR against dev/X.Y.Z</Step>
+    <svg width="12" height="24" viewBox="0 0 12 24" className="text-muted-foreground shrink-0"><path d="M6 0v18M2 15l4 5 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
     <Step color="purple">In Review</Step>
-    <Arrow label="merge" />
-    <Step color="green">Squash merge</Step>
-    <Arrow label="close" />
-    <Step color="blue">Done</Step>
-    <Arrow label="repeat" />
-    <Step color="blue">Next task</Step>
+    <svg width="12" height="24" viewBox="0 0 12 24" className="text-muted-foreground shrink-0"><path d="M6 0v18M2 15l4 5 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+    <Step color="green">Squash merge, delete branch</Step>
+    <svg width="12" height="24" viewBox="0 0 12 24" className="text-muted-foreground shrink-0"><path d="M6 0v18M2 15l4 5 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+    <Step color="blue">Done — write Resolution Summary</Step>
+    <svg width="40" height="32" viewBox="0 0 40 32" className="text-muted-foreground shrink-0"><path d="M20 0v8c0 8-16 8-16 16v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" strokeDasharray="4 3"/><path d="M0 26l4 5 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
+    <span className="text-[11px] font-medium text-muted-foreground">↑ repeat</span>
   </div>
 </div>
 

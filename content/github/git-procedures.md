@@ -116,9 +116,7 @@ Test on staging — get peer sign-off from another developer. Test the deployed 
 
 ## SOP 4: Release to Production
 
-Ship a tested staging build to production, tag the release, and hand off for post-release tasks.
-
-This procedure has two phases with a clear handoff point: Steps 1–4 are done by any developer (the person shipping the release). Steps 5–7 are done by management (Jira administration and next cycle setup).
+Ship a tested staging build to production and tag the release.
 
 ### Developer: Merge and Tag
 
@@ -144,40 +142,7 @@ git push origin --tags
 > [!RULE]
 > Handoff to management after tags are pushed.
 
-### Management: Post-Release
-
-Mark Jira Fix Versions as Released. Go to Jira → Project Settings → Versions. For each component version that shipped: click the version → click Release → set release date to today.
-
-> [!INFO]
-> This step is a candidate for automation (GitHub tag push → Jira version release). Until that automation is live, this is manual.
-
-Release announcement in Slack.
-
-> [!INFO]
-> Planned automation — this step will be automated. An n8n workflow will detect the release and post a formatted announcement to Slack with version numbers, component list, and summary of changes pulled from Jira. Until live, post manually in #dev-amara: what shipped, which components, version numbers.
-
-Start next development cycle:
-
-- Decide the next version numbers (planning decision — management)
-- Create the next dev/X.Y.Z branch from prod (any developer can do this):
-
-```bash
-git checkout prod
-git pull origin prod
-git checkout -b dev/1.3.0
-git push -u origin dev/1.3.0
-```
-
-- Create the corresponding Fix Versions in Jira (which auto-creates Bug & Maintenance epics)
-- Delete the old dev branch (any developer can do this):
-
-```bash
-git branch -d dev/1.2.0
-git push origin --delete dev/1.2.0
-```
-
-> [!INFO]
-> Planned automation — old dev branch cleanup will be automated via GitHub Actions. Once the new dev branch is created, the previous one is deleted automatically.
+After tags are pushed, management handles the remaining steps: marking Jira Fix Versions as Released, posting a release announcement in #dev-amara, and setting up the next development cycle (new dev/X.Y.Z branch from prod, new Fix Versions in Jira, old dev branch cleanup). The developer's part of the release is done.
 
 ## SOP 5: Hotfix
 
@@ -249,6 +214,3 @@ Jira and Slack:
 - Create a Hotfix epic in Jira: `[Component] Hotfix X.Y.Z`
 - Mark the Fix Version as Released
 - Post in Slack: what broke, what was fixed, what version
-
-> [!INFO]
-> Planned automation — the Slack announcement and Jira version release will be automated as part of the release chain workflow. Until live, do these manually.

@@ -4,21 +4,22 @@ order: 2
 type: 'sop'
 roles:
   - developer
-summary: 'Five step-by-step procedures: start a feature, finish a feature, promote to staging, release to prod, and hotfix.'
-version: '1.1'
-lastUpdated: '2026-03-03'
+summary: 'Six step-by-step procedures: start a feature, finish a feature, promote to staging, release to prod, post-release, and hotfix.'
+version: '1.2'
+lastUpdated: '2026-03-04'
 ---
 
-Five procedures covering the full Git workflow. All merges happen via GitHub Pull Requests — select the merge strategy using the PR dropdown, not local git commands.
+Six procedures covering the full Git workflow. All merges happen via GitHub Pull Requests — select the merge strategy using the PR dropdown, not local git commands.
 
-| Procedure                | GitHub Merge Button  | Who                                       |
-| ------------------------ | -------------------- | ----------------------------------------- |
-| Feature → dev/X.Y.Z      | **Squash and merge** | Any developer                             |
-| dev/X.Y.Z → staging      | **Merge commit**     | Coordinate in channel first               |
-| staging → prod           | **Merge commit**     | Dev branch owner, after team confirmation |
-| hotfix → staging or prod | **Merge commit**     | Hotfix author + reviewer                  |
+| Procedure                        | GitHub Merge Button  | Who                                         |
+| -------------------------------- | -------------------- | ------------------------------------------- |
+| Feature → dev/X.Y.Z              | **Squash and merge** | Any developer                               |
+| dev/X.Y.Z → staging              | **Merge commit**     | Any developer (coordinate in channel first) |
+| staging → prod (merge + tag)     | **Merge commit**     | Any developer, after team confirmation      |
+| Post-release (Jira + next cycle) | —                    | Management                                  |
+| hotfix → staging or prod         | **Merge commit**     | Hotfix author + reviewer                    |
 
-## Step 1: Start a Feature
+## SOP 1: Start a Feature
 
 Create a short-lived feature branch from the current dev branch, named with the Jira ticket key.
 
@@ -53,7 +54,7 @@ git push
 
 Move your Jira ticket to **In Progress**.
 
-## Step 2: Finish a Feature
+## SOP 2: Finish a Feature
 
 Merge the feature back into the dev branch via GitHub PR, then clean up.
 
@@ -89,30 +90,45 @@ git checkout -b feature/DEV-501-fix-edge-case
 > [!RULE]
 > Never reuse a merged feature branch. Always create a fresh one from dev.
 
-## Step 3: Promote Dev to Staging
+## SOP 3: Promote Dev to Staging
 
-Move a dev branch to the staging environment for pre-production testing.
+Move a dev branch to the staging environment for pre-production testing. Any developer can initiate this.
 
-Announce in the team channel. Post what you're deploying and how long you need staging. Wait for the all-clear.
+> [!TIP] Pre-staging checklist
+>
+> - All epics for this version are Done (each epic owner has completed Final Review & Close-out)
+> - Each epic has a resolution summary describing what was delivered
+> - Epic owners have confirmed version files are up to date in their component's code
+> - `compatibility.json` updated if any work in this version affects cross-component interactions
+> - All feature branches merged to dev/X.Y.Z and deleted
+> - Dev branch builds and runs cleanly
+
+Post in #dev-staging-deploys: what you're deploying, which components, and how long you need staging. Wait for the all-clear if someone is already testing.
 
 Open a Pull Request on GitHub. Base: `staging` ← Compare: `dev/1.2.0`.
 
 Merge using **"Create a merge commit"**. Use regular merge commit — not squash, not rebase.
 
+Test on staging — get peer sign-off from another developer. Test the deployed staging build against the version's acceptance criteria.
+
 > [!RULE]
 > Only the current dev/X.Y.Z should be merged to staging. Anything else must be announced and confirmed by the team.
 
-## Step 4: Release to Production
+## SOP 4: Release to Production
 
-Ship a tested staging build to production and tag the release.
+Ship a tested staging build to production, tag the release, and hand off for post-release tasks.
 
-Confirm staging has been tested. Get peer sign-off from the most appropriate developer.
+This procedure has two phases with a clear handoff point: Steps 1–4 are done by any developer (the person shipping the release). Steps 5–7 are done by management (Jira administration and next cycle setup).
 
-Open a Pull Request. Base: `prod` ← Compare: `staging`.
+### Developer: Merge and Tag
+
+Confirm staging has been tested and is ready. Get peer sign-off from another developer. Confirm all testing is complete.
+
+Open a Pull Request on GitHub. Base: `prod` ← Compare: `staging`.
 
 Merge using **"Create a merge commit"**.
 
-Tag the release:
+Tag the release for each component that shipped:
 
 ```bash
 git checkout prod
@@ -123,17 +139,47 @@ git push origin --tags
 ```
 
 > [!TIP]
-> Only tag the components that actually changed.
+> Only tag the components that actually changed. Use the component tag prefixes: `plugin/`, `backend/`, `website/`, `meshgen/`.
 
-Post-release:
+> [!RULE]
+> Handoff to management after tags are pushed.
 
-- Update `compatibility.json` if component versions changed
-- Mark the relevant Jira Fix Versions as Released
-- Post a brief release summary in Slack
-- Create the next `dev/X.Y.Z` branch from `prod`
-- Delete the old dev branch
+### Management: Post-Release
 
-## Step 5: Hotfix
+Mark Jira Fix Versions as Released. Go to Jira → Project Settings → Versions. For each component version that shipped: click the version → click Release → set release date to today.
+
+> [!INFO]
+> This step is a candidate for automation (GitHub tag push → Jira version release). Until that automation is live, this is manual.
+
+Release announcement in Slack.
+
+> [!INFO]
+> Planned automation — this step will be automated. An n8n workflow will detect the release and post a formatted announcement to Slack with version numbers, component list, and summary of changes pulled from Jira. Until live, post manually in #dev-amara: what shipped, which components, version numbers.
+
+Start next development cycle:
+
+- Decide the next version numbers (planning decision — management)
+- Create the next dev/X.Y.Z branch from prod (any developer can do this):
+
+```bash
+git checkout prod
+git pull origin prod
+git checkout -b dev/1.3.0
+git push -u origin dev/1.3.0
+```
+
+- Create the corresponding Fix Versions in Jira (which auto-creates Bug & Maintenance epics)
+- Delete the old dev branch (any developer can do this):
+
+```bash
+git branch -d dev/1.2.0
+git push origin --delete dev/1.2.0
+```
+
+> [!INFO]
+> Planned automation — old dev branch cleanup will be automated via GitHub Actions. Once the new dev branch is created, the previous one is deleted automatically.
+
+## SOP 5: Hotfix
 
 Fix a critical production bug. The path depends on whether staging has unreleased work.
 
@@ -203,3 +249,6 @@ Jira and Slack:
 - Create a Hotfix epic in Jira: `[Component] Hotfix X.Y.Z`
 - Mark the Fix Version as Released
 - Post in Slack: what broke, what was fixed, what version
+
+> [!INFO]
+> Planned automation — the Slack announcement and Jira version release will be automated as part of the release chain workflow. Until live, do these manually.

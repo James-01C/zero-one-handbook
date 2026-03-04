@@ -126,6 +126,18 @@ const stepMdxComponents = {
 };
 
 const introMdxComponents = {
+  h2: (props: ComponentPropsWithoutRef<'h2'>) => (
+    <h2
+      className="mb-4 mt-12 border-l-4 border-blue-500 bg-blue-500/[0.04] py-2.5 pl-4 pr-3 font-heading text-lg font-bold tracking-tight text-foreground first:mt-0 dark:bg-blue-500/[0.06]"
+      {...props}
+    />
+  ),
+  h3: (props: ComponentPropsWithoutRef<'h3'>) => (
+    <h3
+      className="mb-2 mt-6 text-sm font-semibold text-foreground"
+      {...props}
+    />
+  ),
   p: (props: ComponentPropsWithoutRef<'p'>) => (
     <p className="mb-4 leading-7 text-muted-foreground" {...props} />
   ),
@@ -134,6 +146,15 @@ const introMdxComponents = {
       className="mb-4 ml-6 list-disc space-y-1 text-muted-foreground"
       {...props}
     />
+  ),
+  ol: (props: ComponentPropsWithoutRef<'ol'>) => (
+    <ol
+      className="mb-4 ml-6 list-decimal space-y-1 text-muted-foreground"
+      {...props}
+    />
+  ),
+  li: (props: ComponentPropsWithoutRef<'li'>) => (
+    <li className="leading-relaxed" {...props} />
   ),
   blockquote: (props: ComponentPropsWithoutRef<'blockquote'>) => (
     <blockquote
@@ -144,9 +165,27 @@ const introMdxComponents = {
   strong: (props: ComponentPropsWithoutRef<'strong'>) => (
     <strong className="font-semibold text-foreground" {...props} />
   ),
-  code: (props: ComponentPropsWithoutRef<'code'>) => (
-    <code
-      className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground"
+  code: (props: ComponentPropsWithoutRef<'code'>) => {
+    const isInline = !props.className;
+    if (isInline) {
+      return (
+        <code
+          className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground"
+          {...props}
+        />
+      );
+    }
+    return <code className="font-mono text-xs" {...props} />;
+  },
+  pre: (props: ComponentPropsWithoutRef<'pre'>) => (
+    <pre
+      className="mb-4 overflow-x-auto rounded-md bg-zinc-900 p-3 font-mono text-xs text-zinc-100 dark:bg-zinc-800/50 last:mb-0"
+      {...props}
+    />
+  ),
+  a: (props: ComponentPropsWithoutRef<'a'>) => (
+    <a
+      className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
       {...props}
     />
   ),
